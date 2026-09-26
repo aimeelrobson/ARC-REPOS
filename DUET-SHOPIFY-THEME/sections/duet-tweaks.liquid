@@ -9,7 +9,8 @@
   .collection__title .title { font-size: clamp(4rem, 6vw, 6.8rem); line-height: 1; }
 
   .product-card-wrapper { background: transparent; border: 0; box-shadow: none; padding: 0; transition: transform 220ms ease; }
-  .product-card-wrapper .card { border-radius: 28px; overflow: hidden; background: #fff; }
+  .product-card-wrapper .card { border-radius: 28px; overflow: hidden; background: #fff; box-shadow: 0 22px 44px -18px rgba(28, 21, 23, 0.28), 0 6px 14px -8px rgba(28, 21, 23, 0.12) !important; transition: box-shadow 260ms ease; }
+  .product-card-wrapper:hover .card { box-shadow: 0 32px 60px -20px rgba(28, 21, 23, 0.34), 0 10px 20px -10px rgba(28, 21, 23, 0.14) !important; }
   .product-card-wrapper .card__inner, .product-card-wrapper .card__media { border: 0; box-shadow: none; border-radius: 0 !important; }
   .product-card-wrapper .card__media img { transition: transform 320ms ease; }
   .product-card-wrapper .card > .card__content { background: #fff; padding: 2.4rem 2.6rem 2.8rem; }
@@ -21,8 +22,9 @@
   .product-card-wrapper .quick-add__submit { min-height: 5rem; background: var(--duet-ink, #1C1517); color: var(--duet-cream, #FFF6F1); border-color: var(--duet-ink, #1C1517); }
   .product-card-wrapper:hover { transform: translateY(-4px); }
   .product-card-wrapper:hover .card__media img { transform: scale(1.03); }
-  main [id*="__featured_collection"] .card, main [id*="__featured_collection"] .card::after,
+  main [id*="__featured_collection"] .card::after,
   main [id*="__featured_collection"] .card__inner, main [id*="__featured_collection"] .card__inner::after { border: 0 !important; box-shadow: none !important; }
+  main [id*="__featured_collection"] .card { border: 0 !important; }
 
   @media screen and (min-width: 750px) {
     main [id*="__featured_collection"] .product-grid { column-gap: 2.4rem; row-gap: 2.4rem; }
@@ -62,7 +64,7 @@
   }
 
   /* Gallery: cream, rounded tiles */
-  main [id*="__image_gallery"] { background: var(--duet-cream, #FFF6F1); padding-top: 6.4rem; padding-bottom: 6.4rem; }
+  main [id*="__image_gallery"] { background: #fff; padding-top: 6.4rem; padding-bottom: 6.4rem; }
   main [id*="__image_gallery"] > .page-width { text-align: center; padding-bottom: 2.4rem; }
   main [id*="__image_gallery"] h1, main [id*="__image_gallery"] h2 { font-size: clamp(4rem, 6vw, 6.8rem); line-height: 1; }
   main [id*="__image_gallery"] img { border-radius: 24px; }

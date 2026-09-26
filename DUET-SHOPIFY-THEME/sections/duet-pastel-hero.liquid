@@ -1,100 +1,84 @@
 {%- style -%}
-  .dph { background: var(--duet-cream, #FFF6F1); color: var(--duet-ink, #1C1517); overflow: hidden; position: relative; }
-  .dph__inner { display: grid; grid-template-columns: 1.05fr 1fr; gap: 4rem; align-items: center; padding-block: 6rem 7rem; }
-  .dph__eyebrow { font: 600 1.2rem/1.2 var(--duet-sans); letter-spacing: 0.18em; text-transform: uppercase; margin: 0 0 1.8rem; display: inline-flex; align-items: center; gap: 1rem; }
-  .dph__eyebrow::before { content: ""; width: 1rem; height: 1rem; border-radius: 50%; background: var(--duet-hotpink, #FF7EB3); }
-  .dph__title { font-family: var(--duet-serif) !important; font-size: clamp(5.2rem, 8.4vw, 10.4rem) !important; line-height: 0.92 !important; margin: 0 0 2.4rem; }
-  .dph__title em { font-style: italic; color: var(--duet-hotpink, #FF7EB3); }
-  .dph__sub { font-size: 1.8rem; line-height: 1.55; max-width: 46rem; margin: 0 0 3.2rem; }
-  .dph__ctas { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-bottom: 3.2rem; }
-  .dph__btn { display: inline-flex; align-items: center; justify-content: center; min-height: 5.4rem; padding: 0 3.2rem; border-radius: 999px; font: 600 1.5rem/1 var(--duet-sans); letter-spacing: 0.03em; text-decoration: none; transition: background-color 180ms ease, transform 180ms ease; }
-  .dph__btn--ink { background: var(--duet-ink, #1C1517); color: var(--duet-cream, #FFF6F1); }
-  .dph__btn--ink:hover { background: var(--duet-hotpink, #FF7EB3); color: var(--duet-ink, #1C1517); transform: translateY(-1px); }
-  .dph__btn--ghost { border: 1.5px solid var(--duet-ink, #1C1517); color: var(--duet-ink, #1C1517); }
-  .dph__btn--ghost:hover { background: var(--duet-bubblegum, #F7C6D6); }
-  .dph__trust { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.8rem; }
-  .dph__trust li { font: 500 1.3rem/1 var(--duet-sans); padding: 0.9rem 1.4rem; border-radius: 999px; background: #fff; }
-  .dph__trust li:nth-child(1) { background: var(--duet-mint, #CDEBDD); }
-  .dph__trust li:nth-child(2) { background: var(--duet-lilac, #D9CCF5); }
-  .dph__trust li:nth-child(3) { background: var(--duet-butter, #FCE7A0); }
+  .dph { position: relative; background: var(--duet-mint, #CDEBDD); color: var(--duet-ink, #1C1517); overflow: hidden; }
+  .dph__stage { position: relative; min-height: min(86vh, 78rem); display: flex; align-items: center; }
+  .dph__img { position: absolute; inset: 0; }
+  .dph__img img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 40%; display: block; }
+  .dph__img--mobile { display: none; }
+  .dph__copy { position: relative; z-index: 2; max-width: 56rem; padding-block: 8rem; }
+  .dph__title { font-family: "Instrument Serif", Georgia, "Times New Roman", serif !important; font-weight: 400 !important; font-size: clamp(6rem, 9.5vw, 13.6rem) !important; line-height: 0.88 !important; letter-spacing: -0.02em; margin: 0 0 2.8rem; text-wrap: balance; }
+  .dph__title em { font-style: italic; }
+  .dph__btn { display: inline-flex; align-items: center; justify-content: center; min-height: 5.6rem; padding: 0 3.6rem; border-radius: 999px; background: var(--duet-ink, #1C1517); color: var(--duet-cream, #FFF6F1); font: 600 1.5rem/1 "Figtree", system-ui, sans-serif; letter-spacing: 0.03em; text-decoration: none; transition: background-color 180ms ease, transform 180ms ease; }
+  .dph__btn:hover { background: var(--duet-hotpink, #FF7EB3); color: var(--duet-ink, #1C1517); transform: translateY(-2px); }
+  .dph__float { position: absolute; z-index: 3; right: 6%; top: 14%; font: 600 1.5rem/1 "Figtree", system-ui, sans-serif; padding: 1.3rem 2.2rem; border-radius: 999px; background: var(--duet-bubblegum, #F7C6D6); color: var(--duet-ink, #1C1517); box-shadow: 0 14px 30px -10px rgba(28, 21, 23, 0.35); animation: dph-float 4.5s ease-in-out infinite; white-space: nowrap; }
+  @keyframes dph-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-  .dph__art { position: relative; aspect-ratio: 4 / 4.6; max-width: 56rem; width: 100%; justify-self: end; }
-  .dph__blob { position: absolute; border-radius: 50%; z-index: 0; }
-  .dph__blob--a { width: 62%; aspect-ratio: 1; background: var(--duet-bubblegum, #F7C6D6); top: -4%; right: -8%; }
-  .dph__blob--b { width: 34%; aspect-ratio: 1; background: var(--duet-butter, #FCE7A0); bottom: 2%; left: -6%; }
-  .dph__main { position: absolute; z-index: 1; inset: 4% 6% 8% 12%; border-radius: 999px 999px 32px 32px; overflow: hidden; box-shadow: 0 24px 60px rgba(28, 21, 23, 0.14); }
-  .dph__small { position: absolute; z-index: 2; width: 34%; aspect-ratio: 1; left: 0; bottom: 4%; border-radius: 50%; overflow: hidden; border: 6px solid var(--duet-cream, #FFF6F1); transform: rotate(-6deg); box-shadow: 0 16px 36px rgba(28, 21, 23, 0.16); }
-  .dph__main img, .dph__small img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .dph__sticker { position: absolute; z-index: 3; font: 600 1.4rem/1 var(--duet-sans); padding: 1.2rem 1.8rem; border-radius: 999px; background: var(--duet-ink, #1C1517); color: var(--duet-cream, #FFF6F1); white-space: nowrap; box-shadow: 0 10px 24px rgba(28, 21, 23, 0.18); }
-  .dph__sticker--1 { top: 10%; left: 2%; transform: rotate(-8deg); }
-  .dph__sticker--2 { top: 44%; right: -2%; transform: rotate(7deg); background: var(--duet-mint, #CDEBDD); color: var(--duet-ink, #1C1517); }
-  .dph__sticker--3 { bottom: 2%; right: 12%; transform: rotate(-4deg); background: var(--duet-lilac, #D9CCF5); color: var(--duet-ink, #1C1517); font-family: var(--duet-serif); font-style: italic; font-weight: 400; font-size: 2rem; }
+  .dph__ticker { position: relative; z-index: 2; background: var(--duet-ink, #1C1517); color: var(--duet-cream, #FFF6F1); overflow: hidden; white-space: nowrap; }
+  .dph__track { display: inline-flex; gap: 0; padding-block: 1.6rem; animation: dph-scroll 32s linear infinite; }
+  .dph__track span { font: 600 1.4rem/1 "Figtree", system-ui, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; padding-inline: 2.4rem; display: inline-flex; align-items: center; gap: 2.4rem; }
+  .dph__track span::after { content: "✶"; color: var(--duet-bubblegum, #F7C6D6); }
+  @keyframes dph-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .dph__ticker:hover .dph__track { animation-play-state: paused; }
 
-  @media screen and (max-width: 989px) {
-    .dph__inner { grid-template-columns: 1fr; gap: 3.2rem; padding-block: 4rem 5.6rem; }
-    .dph__art { justify-self: center; max-width: 46rem; }
+  @media screen and (max-width: 749px) {
+    .dph__stage { display: block; min-height: 0; }
+    .dph__img { position: relative; inset: auto; aspect-ratio: 4 / 5; }
+    .dph__img--desktop { display: none; }
+    .dph__img--mobile { display: block; }
+    .dph__img img { object-position: center 35%; }
+    .dph__copy { max-width: none; padding-block: 3.6rem 4.4rem; background: var(--duet-bubblegum, #F7C6D6); }
+    .dph__title { font-size: clamp(5.2rem, 15vw, 7.2rem) !important; margin-bottom: 2.4rem; }
+    .dph__btn { width: 100%; }
+    .dph__float { top: 3.2rem; right: 1.6rem; font-size: 1.3rem; padding: 1.1rem 1.8rem; }
   }
-  @media screen and (max-width: 480px) {
-    .dph__sticker { font-size: 1.2rem; padding: 1rem 1.4rem; }
-    .dph__sticker--3 { font-size: 1.6rem; }
-    .dph__btn { flex: 1 1 100%; }
+  @media (prefers-reduced-motion: reduce) {
+    .dph__float, .dph__track { animation: none; }
+    .dph__btn { transition: none; }
+    .dph__btn:hover { transform: none; }
   }
-  @media (prefers-reduced-motion: reduce) { .dph__btn { transition: none; } .dph__btn:hover { transform: none; } }
 {%- endstyle -%}
 
 <section class="dph" aria-labelledby="dph-title-{{ section.id }}">
-  <div class="dph__inner page-width">
-    <div class="dph__copy">
-      {%- if section.settings.eyebrow != blank -%}<p class="dph__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+  <div class="dph__stage">
+    {%- if section.settings.image != blank -%}
+      <div class="dph__img dph__img--desktop">
+        {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '900, 1400, 1900, 2400', sizes: '100vw', alt: section.settings.image.alt }}
+      </div>
+    {%- endif -%}
+    {%- assign mobile_img = section.settings.image_mobile | default: section.settings.image -%}
+    {%- if mobile_img != blank -%}
+      <div class="dph__img dph__img--mobile">
+        {{ mobile_img | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '500, 750, 1000', sizes: '100vw', alt: mobile_img.alt }}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.float_text != blank -%}<span class="dph__float">{{ section.settings.float_text }}</span>{%- endif -%}
+    <div class="dph__copy page-width">
       <h1 class="dph__title" id="dph-title-{{ section.id }}">{{ section.settings.heading }}</h1>
-      {%- if section.settings.subheading != blank -%}<p class="dph__sub">{{ section.settings.subheading }}</p>{%- endif -%}
-      <div class="dph__ctas">
-        {%- if section.settings.button_label != blank -%}<a class="dph__btn dph__btn--ink" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a>{%- endif -%}
-        {%- if section.settings.button_label_2 != blank -%}<a class="dph__btn dph__btn--ghost" href="{{ section.settings.button_link_2 | default: '#how' }}">{{ section.settings.button_label_2 }}</a>{%- endif -%}
-      </div>
-      <ul class="dph__trust">
-        {%- if section.settings.trust_1 != blank -%}<li>{{ section.settings.trust_1 }}</li>{%- endif -%}
-        {%- if section.settings.trust_2 != blank -%}<li>{{ section.settings.trust_2 }}</li>{%- endif -%}
-        {%- if section.settings.trust_3 != blank -%}<li>{{ section.settings.trust_3 }}</li>{%- endif -%}
-      </ul>
-    </div>
-    <div class="dph__art">
-      <span class="dph__blob dph__blob--a" aria-hidden="true"></span>
-      <span class="dph__blob dph__blob--b" aria-hidden="true"></span>
-      <div class="dph__main">
-        {%- if section.settings.image != blank -%}
-          {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '500, 800, 1100, 1400', sizes: '(min-width: 990px) 50vw, 90vw' }}
-        {%- endif -%}
-      </div>
-      {%- if section.settings.image_small != blank -%}
-        <div class="dph__small">{{ section.settings.image_small | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 600', sizes: '(min-width: 990px) 20vw, 34vw' }}</div>
+      {%- if section.settings.button_label != blank -%}
+        <a class="dph__btn" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a>
       {%- endif -%}
-      {%- if section.settings.sticker_1 != blank -%}<span class="dph__sticker dph__sticker--1">{{ section.settings.sticker_1 }}</span>{%- endif -%}
-      {%- if section.settings.sticker_2 != blank -%}<span class="dph__sticker dph__sticker--2">{{ section.settings.sticker_2 }}</span>{%- endif -%}
-      {%- if section.settings.sticker_3 != blank -%}<span class="dph__sticker dph__sticker--3">{{ section.settings.sticker_3 }}</span>{%- endif -%}
     </div>
   </div>
+  {%- assign items = section.settings.ticker | split: '|' -%}
+  {%- if items.size > 0 -%}
+    <div class="dph__ticker" aria-label="{{ section.settings.ticker | replace: '|', ', ' | escape }}">
+      <div class="dph__track" aria-hidden="true">
+        {%- for n in (1..2) -%}{%- for item in items -%}<span>{{ item | strip }}</span>{%- endfor -%}{%- for item in items -%}<span>{{ item | strip }}</span>{%- endfor -%}{%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
 </section>
 
 {% schema %}
 {
   "name": "DUET pastel hero",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Wireless clip-on mics" },
+    { "type": "image_picker", "id": "image", "label": "Image (desktop, wide)" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Image (mobile, portrait)" },
     { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Room for <em>two</em> voices." },
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Two clip-on mics, one receiver, no app or pairing. Plug in and press record." },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the kit" },
     { "type": "url", "id": "button_link", "label": "Button link" },
-    { "type": "text", "id": "button_label_2", "label": "Second button label", "default": "How it works" },
-    { "type": "url", "id": "button_link_2", "label": "Second button link" },
-    { "type": "text", "id": "trust_1", "label": "Trust pill 1", "default": "Free NZ shipping" },
-    { "type": "text", "id": "trust_2", "label": "Trust pill 2", "default": "14-day returns" },
-    { "type": "text", "id": "trust_3", "label": "Trust pill 3", "default": "Kits from $69 NZD" },
-    { "type": "image_picker", "id": "image", "label": "Main image (arch)" },
-    { "type": "image_picker", "id": "image_small", "label": "Small image (circle)" },
-    { "type": "text", "id": "sticker_1", "label": "Sticker 1", "default": "No app ✶ no pairing" },
-    { "type": "text", "id": "sticker_2", "label": "Sticker 2", "default": "Two mics, one receiver" },
-    { "type": "text", "id": "sticker_3", "label": "Sticker 3", "default": "loud & clear" }
+    { "type": "text", "id": "float_text", "label": "Floating pill", "default": "loud & clear ✶" },
+    { "type": "text", "id": "ticker", "label": "Scrolling ticker", "info": "Separate each item with |", "default": "No app | No pairing | Two mics, one receiver | Free NZ shipping | 14-day returns | Kits from $69 NZD" }
   ],
   "presets": [{ "name": "DUET pastel hero" }]
 }

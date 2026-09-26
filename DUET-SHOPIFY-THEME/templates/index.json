@@ -7,21 +7,13 @@
     "duet_pastel_hero": {
       "type": "duet-pastel-hero",
       "settings": {
-        "eyebrow": "Wireless clip-on mics · NZ",
+        "image": "shopify://shop_images/duet-pastel-people-01-bathtub-wide.jpg",
+        "image_mobile": "shopify://shop_images/duet-pastel-people-01-bathtub.jpg",
         "heading": "Room for <em>two</em> voices.",
-        "subheading": "Two clip-on mics, one receiver, no app or pairing. Plug in and press record.",
         "button_label": "Shop the kit",
         "button_link": "shopify://collections/duet-kits",
-        "button_label_2": "How it works",
-        "button_link_2": "#how",
-        "trust_1": "Free NZ shipping",
-        "trust_2": "14-day returns",
-        "trust_3": "Kits from $69 NZD",
-        "image": "shopify://shop_images/duet-pastel-people-01-bathtub.jpg",
-        "image_small": "shopify://shop_images/duet-pastel-hero-03-bubbles.jpg",
-        "sticker_1": "No app ✶ no pairing",
-        "sticker_2": "Two mics, one receiver",
-        "sticker_3": "loud & clear"
+        "float_text": "loud & clear ✶",
+        "ticker": "No app | No pairing | Two mics, one receiver | Free NZ shipping | 14-day returns | Kits from $69 NZD"
       }
     },
     "marquee_YryCpt": {
@@ -93,7 +85,8 @@
         "marquee_height": 56,
         "font_size": 18,
         "marquee_speed": 27
-      }
+      },
+      "disabled": true
     },
     "featured_collection": {
       "type": "featured-collection",
