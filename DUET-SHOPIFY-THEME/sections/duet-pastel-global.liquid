@@ -1,0 +1,156 @@
+{%- comment -%}
+  DUET PASTEL — site-wide styling layer.
+  Lives in the header group so it loads on every page (home, product, collection, cart).
+  Colours come from the theme's colour schemes; this file adds type, shape and pastel details.
+{%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700&display=swap">
+
+{%- style -%}
+  :root {
+    --duet-cream: #FFF6F1;
+    --duet-ink: #1C1517;
+    --duet-bubblegum: #F7C6D6;
+    --duet-hotpink: #FF7EB3;
+    --duet-mint: #CDEBDD;
+    --duet-lilac: #D9CCF5;
+    --duet-butter: #FCE7A0;
+    --duet-peach: #FDD3B8;
+    --duet-radius: 24px;
+    --duet-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+    --duet-sans: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-heading-family: var(--duet-serif);
+    --font-heading-style: normal;
+    --font-heading-weight: 400;
+    --font-body-family: var(--duet-sans);
+    --font-body-style: normal;
+    --font-body-weight: 400;
+    --font-body-weight-bold: 600;
+  }
+
+  html body { font-family: var(--duet-sans) !important; }
+
+  html body h1, html body h2, html body h3,
+  html body .h0, html body .h1, html body .h2, html body .h3,
+  html body .title, html body .product__title h1, html body .product__title h2,
+  html body .card__heading, html body .collection-hero__title,
+  html body .banner__heading, html body .rich-text__heading,
+  html body .collapsible-content__heading, html body .footer-block__heading {
+    font-family: var(--duet-serif) !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  html body .card__heading { font-size: 2.4rem; line-height: 1.1; }
+
+  html body p, html body li, html body .rte, html body .price,
+  html body .button, html body input, html body select, html body .quantity__input {
+    font-family: var(--duet-sans) !important;
+  }
+
+  /* Header: calm cream bar, black logo, soft underline */
+  .section-header .header-wrapper {
+    background: var(--duet-cream);
+    border-bottom: 1px solid rgba(28, 21, 23, 0.08);
+  }
+  .header__menu-item span { font-weight: 500; letter-spacing: 0.02em; }
+  .header__menu-item:hover span { text-decoration-color: var(--duet-hotpink); }
+
+  /* Buttons: rounded pills with a playful pink hover */
+  .button, .shopify-payment-button__button--unbranded, .quick-add__submit {
+    border-radius: 999px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.03em !important;
+    transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+  }
+  .button::before, .button::after,
+  .shopify-payment-button__button--unbranded::before,
+  .shopify-payment-button__button--unbranded::after { border-radius: 999px !important; }
+  .button:not(.button--secondary):not(.button--tertiary):hover,
+  .shopify-payment-button__button--unbranded:hover {
+    background-color: var(--duet-hotpink) !important;
+    color: var(--duet-ink) !important;
+    transform: translateY(-1px);
+  }
+
+  /* Rounded media everywhere */
+  .card__inner, .card__media, .card .media,
+  .product__media-item .media, .product-media-container,
+  .image-with-text__media, .global-media-settings {
+    border-radius: var(--duet-radius) !important;
+    overflow: hidden;
+  }
+
+  /* Product page: variant pills that feel like colour swatches */
+  .product-form__input input[type="radio"] + label {
+    border-radius: 999px !important;
+    padding: 1rem 2.2rem;
+    font-weight: 600;
+    background: #fff;
+    border-color: rgba(28, 21, 23, 0.18);
+  }
+  .product-form__input input[type="radio"]:checked + label {
+    background: var(--duet-ink);
+    color: var(--duet-cream);
+    border-color: var(--duet-ink);
+  }
+  .product-form__input input[type="radio"][value="Pink"] + label::before,
+  .product-form__input input[type="radio"][value="White"] + label::before,
+  .product-form__input input[type="radio"][value="Black"] + label::before {
+    content: "";
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    margin-right: 0.8rem;
+    vertical-align: -0.1rem;
+    border: 1px solid rgba(28, 21, 23, 0.25);
+  }
+  .product-form__input input[type="radio"][value="Pink"] + label::before { background: var(--duet-bubblegum); }
+  .product-form__input input[type="radio"][value="White"] + label::before { background: #fff; }
+  .product-form__input input[type="radio"][value="Black"] + label::before { background: var(--duet-ink); }
+
+  .product__title h1 { font-size: clamp(3.6rem, 5vw, 5.2rem); line-height: 1; }
+  .price-item--regular, .price-item--sale { font-weight: 600; }
+  .product__info-container .product__description { font-size: 1.6rem; line-height: 1.6; }
+
+  /* Collapsible rows (FAQ + product details) */
+  .accordion, .collapsible-content .accordion {
+    border-radius: 18px;
+    border: 0 !important;
+    background: #fff;
+    margin-bottom: 1rem;
+    padding: 0 2rem;
+  }
+  .accordion summary .accordion__title { font-weight: 600; font-size: 1.6rem; }
+
+  /* Inputs and badges */
+  .field__input, .select__select, .quantity { border-radius: 999px !important; }
+  .field::before, .field::after, .select::before, .select::after, .quantity::before, .quantity::after { border-radius: 999px !important; }
+  .badge { border-radius: 999px; font-weight: 600; letter-spacing: 0.04em; }
+
+  /* Footer */
+  .footer { border-top: 0 !important; }
+  .footer-block__heading { font-size: 2.4rem !important; }
+
+  /* Focus that stays visible on pastel */
+  a:focus-visible, button:focus-visible, .button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--duet-ink) !important;
+    outline-offset: 3px;
+    box-shadow: none !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .button, .shopify-payment-button__button--unbranded { transition: none; }
+    .button:hover { transform: none; }
+  }
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "DUET pastel styles",
+  "settings": []
+}
+{% endschema %}

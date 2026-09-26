@@ -1,0 +1,104 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "marquee_CdLyYG": {
+      "type": "Marquee",
+      "blocks": {
+        "text_LprhiP": {
+          "type": "text",
+          "settings": {
+            "new_text": "FREE NZ SHIPPING"
+          }
+        },
+        "text_9Fm6qp": {
+          "type": "text",
+          "settings": {
+            "new_text": "✶"
+          }
+        },
+        "text_Pan4iY": {
+          "type": "text",
+          "settings": {
+            "new_text": "14-DAY RETURNS"
+          }
+        },
+        "text_eyfJzb": {
+          "type": "text",
+          "settings": {
+            "new_text": "✶"
+          }
+        },
+        "text_McwJiU": {
+          "type": "text",
+          "settings": {
+            "new_text": "12-MONTH WARRANTY"
+          }
+        },
+        "text_7pGmLL": {
+          "type": "text",
+          "settings": {
+            "new_text": "✶"
+          }
+        }
+      },
+      "block_order": [
+        "text_LprhiP",
+        "text_9Fm6qp",
+        "text_Pan4iY",
+        "text_eyfJzb",
+        "text_McwJiU",
+        "text_7pGmLL"
+      ],
+      "settings": {
+        "colorBackground": "#CDEBDD",
+        "colorText": "#1C1517",
+        "link": "",
+        "marquee_height": 48,
+        "font_size": 16,
+        "marquee_speed": 12
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "link_list_yRU9eD": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "footer"
+          }
+        },
+        "text_bWwiJq": {
+          "type": "text",
+          "settings": {
+            "heading": "About DUET",
+            "subtext": "<p>Two clip-on mics, one receiver, one phone. Wireless audio for the conversations that need both voices.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "link_list_yRU9eD",
+        "text_bWwiJq"
+      ],
+      "settings": {
+        "color_scheme": "scheme-4",
+        "newsletter_enable": false,
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": true,
+        "show_social": true,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "marquee_CdLyYG",
+    "footer"
+  ]
+}

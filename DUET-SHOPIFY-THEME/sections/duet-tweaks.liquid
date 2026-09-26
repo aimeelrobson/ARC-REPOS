@@ -1,0 +1,88 @@
+{%- style -%}
+  /* DUET homepage — pastel rhythm: cream hero, pink marquee, mint kits, white colourways,
+     cream use cases, white steps, ink trust, lilac story, cream gallery, butter FAQ, bubblegum close */
+
+  /* Kits: mint field, white rounded cards */
+  main [id*="__featured_collection"] > .gradient { background: var(--duet-mint, #CDEBDD); }
+  .collection__title { text-align: center; }
+  .collection__title .title, .collection__title .collection__description { margin-left: auto; margin-right: auto; }
+  .collection__title .title { font-size: clamp(4rem, 6vw, 6.8rem); line-height: 1; }
+
+  .product-card-wrapper { background: transparent; border: 0; box-shadow: none; padding: 0; transition: transform 220ms ease; }
+  .product-card-wrapper .card { border-radius: 28px; overflow: hidden; background: #fff; }
+  .product-card-wrapper .card__inner, .product-card-wrapper .card__media { border: 0; box-shadow: none; border-radius: 0 !important; }
+  .product-card-wrapper .card__media img { transition: transform 320ms ease; }
+  .product-card-wrapper .card > .card__content { background: #fff; padding: 2.4rem 2.6rem 2.8rem; }
+  .product-card-wrapper .card__inner > .card__content { background: transparent; padding: 0; pointer-events: none; }
+  .product-card-wrapper .card__information { padding: 0; }
+  .product-card-wrapper .card__heading { margin: 0 0 0.8rem; }
+  .product-card-wrapper .price { margin-top: 1.2rem; font-size: 1.7rem; }
+  .product-card-wrapper .quick-add { margin: 1.8rem 0 0; }
+  .product-card-wrapper .quick-add__submit { min-height: 5rem; background: var(--duet-ink, #1C1517); color: var(--duet-cream, #FFF6F1); border-color: var(--duet-ink, #1C1517); }
+  .product-card-wrapper:hover { transform: translateY(-4px); }
+  .product-card-wrapper:hover .card__media img { transform: scale(1.03); }
+  main [id*="__featured_collection"] .card, main [id*="__featured_collection"] .card::after,
+  main [id*="__featured_collection"] .card__inner, main [id*="__featured_collection"] .card__inner::after { border: 0 !important; box-shadow: none !important; }
+
+  @media screen and (min-width: 750px) {
+    main [id*="__featured_collection"] .product-grid { column-gap: 2.4rem; row-gap: 2.4rem; }
+  }
+  @media screen and (max-width: 749px) {
+    .product-card-wrapper .card > .card__content { padding: 2rem 2rem 2.4rem; }
+    main [id*="__featured_collection"] .product-grid { column-gap: 1.6rem; row-gap: 2.4rem; }
+  }
+
+  /* Trust bar: ink field, pastel pills */
+  main [id*="__multicolumn_trust"] > .multicolumn { background: var(--duet-ink, #1C1517); color: var(--duet-cream, #FFF6F1); }
+  main [id*="__multicolumn_trust"] .title { color: var(--duet-cream, #FFF6F1); font-size: clamp(3.6rem, 5vw, 5.6rem); }
+  main [id*="__multicolumn_trust"] .multicolumn-card { border-radius: 24px; padding: 2.4rem 1.6rem; color: var(--duet-ink, #1C1517); }
+  main [id*="__multicolumn_trust"] .multicolumn-list__item:nth-child(1) .multicolumn-card { background: var(--duet-bubblegum, #F7C6D6); }
+  main [id*="__multicolumn_trust"] .multicolumn-list__item:nth-child(2) .multicolumn-card { background: var(--duet-mint, #CDEBDD); }
+  main [id*="__multicolumn_trust"] .multicolumn-list__item:nth-child(3) .multicolumn-card { background: var(--duet-lilac, #D9CCF5); }
+  main [id*="__multicolumn_trust"] .multicolumn-list__item:nth-child(4) .multicolumn-card { background: var(--duet-butter, #FCE7A0); }
+  main [id*="__multicolumn_trust"] .multicolumn-card__info, main [id*="__multicolumn_trust"] .multicolumn-card__info p,
+  main [id*="__multicolumn_trust"] .multicolumn-card__info h3 { color: var(--duet-ink, #1C1517); }
+  main [id*="__multicolumn_trust"] .multicolumn-card__info h3 { font-size: 2.8rem; }
+
+  /* Story: lilac field, arched image */
+  main [id*="__image_with_text"] > .gradient,
+  main [id*="__image_with_text"] .image-with-text__content { background: var(--duet-lilac, #D9CCF5); }
+  main [id*="__image_with_text"] .image-with-text__media { border-radius: 999px 999px 32px 32px !important; overflow: hidden; }
+  main [id*="__image_with_text"] .image-with-text__heading { font-size: clamp(4rem, 5.5vw, 6rem); line-height: 1; }
+  @media screen and (min-width: 990px) {
+    main [id*="__image_with_text"] .image-with-text__grid { align-items: center; }
+    main [id*="__image_with_text"] .image-with-text__media-item { padding: 4rem; }
+  }
+
+  /* Gallery: cream, rounded tiles */
+  main [id*="__image_gallery"] { background: var(--duet-cream, #FFF6F1); padding-top: 6.4rem; padding-bottom: 6.4rem; }
+  main [id*="__image_gallery"] > .page-width { text-align: center; padding-bottom: 2.4rem; }
+  main [id*="__image_gallery"] h1, main [id*="__image_gallery"] h2 { font-size: clamp(4rem, 6vw, 6.8rem); line-height: 1; }
+  main [id*="__image_gallery"] img { border-radius: 24px; }
+  main [id*="__image_gallery"] .mw-image-gallery { margin-bottom: 0; padding-inline: 1.6rem; }
+
+  /* FAQ: butter field, white rows */
+  main [id*="__collapsible_content"] > .gradient,
+  main [id*="__collapsible_content"] .collapsible-content { background: var(--duet-butter, #FCE7A0); }
+  main [id*="__collapsible_content"] .collapsible-content__heading { font-size: clamp(4rem, 6vw, 6.8rem); line-height: 1; }
+  main [id*="__collapsible_content"] .collapsible-content__grid,
+  main [id*="__collapsible_content"] .collapsible-content-wrapper-narrow { background: transparent !important; }
+  .shopify-section:has(.collapsible-content__heading) { margin-top: 0; }
+
+  /* Closing call to action: bubblegum */
+  main [id*="__rich_text"] .rich-text, main [id*="__rich_text"] > .gradient { background: var(--duet-bubblegum, #F7C6D6); }
+  main [id*="__rich_text"] .rich-text__heading { font-size: clamp(4.4rem, 7vw, 8rem); line-height: 0.95; }
+  main [id*="__rich_text"] .content-container, main [id*="__rich_text"] .content-container::after { border: 0 !important; box-shadow: none !important; background: transparent; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-card-wrapper, .product-card-wrapper .card__media img { transition: none; }
+    .product-card-wrapper:hover, .product-card-wrapper:hover .card__media img { transform: none; }
+  }
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "DUET tweaks",
+  "settings": []
+}
+{% endschema %}

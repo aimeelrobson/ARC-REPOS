@@ -1,0 +1,65 @@
+{%- style -%}
+  .dps { background: #fff; padding-block: 7.2rem; scroll-margin-top: 2rem; }
+  .dps__head { text-align: center; max-width: 68rem; margin: 0 auto 4rem; }
+  .dps__head h2 { font-size: clamp(4rem, 6vw, 6.8rem) !important; line-height: 1 !important; margin: 0 0 1.2rem; }
+  .dps__head h2 em { font-style: italic; }
+  .dps__head p { font-size: 1.7rem; margin: 0; }
+  .dps__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4rem; list-style: none; padding: 0; margin: 0; counter-reset: step; }
+  .dps__step { border-radius: 28px; padding: 2.4rem; display: grid; gap: 1.6rem; align-content: start; counter-increment: step; }
+  .dps__num { font: 600 1.2rem/1 var(--duet-sans); letter-spacing: 0.16em; text-transform: uppercase; }
+  .dps__num::before { content: "Step " counter(step); }
+  .dps__step h3 { font-size: 3.4rem !important; line-height: 1 !important; margin: 0; }
+  .dps__step p { font-size: 1.6rem; line-height: 1.55; margin: 0; }
+  .dps__media { border-radius: 20px; overflow: hidden; aspect-ratio: 5 / 4; }
+  .dps__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dps__note { text-align: center; margin: 3.2rem auto 0; font-size: 1.5rem; max-width: 60rem; }
+  @media screen and (max-width: 989px) { .dps__grid { grid-template-columns: 1fr; max-width: 52rem; margin: 0 auto; } }
+  @media screen and (max-width: 480px) { .dps { padding-block: 5.6rem; } .dps__step h3 { font-size: 3rem !important; } }
+{%- endstyle -%}
+
+<section class="dps" id="how" aria-labelledby="dps-title-{{ section.id }}">
+  <div class="page-width">
+    <div class="dps__head">
+      <h2 id="dps-title-{{ section.id }}">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+    <ol class="dps__grid">
+      {%- for block in section.blocks -%}
+        <li class="dps__step" style="background: {{ block.settings.bg }};" {{ block.shopify_attributes }}>
+          <span class="dps__num" aria-hidden="true"></span>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+          {%- if block.settings.image != blank -%}
+            <div class="dps__media">{{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', sizes: '(min-width: 990px) 30vw, 90vw' }}</div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ol>
+    {%- if section.settings.note != blank -%}<p class="dps__note">{{ section.settings.note }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DUET how it works",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Plug in. Clip on. <em>Hit record.</em>" },
+    { "type": "text", "id": "text", "label": "Text", "default": "No app. No Bluetooth pairing. Nothing to set up." },
+    { "type": "text", "id": "note", "label": "Small print", "default": "Connects via USB-C: modern Android phones and iPhone 15 and newer." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Plug in" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Pop the receiver into your phone's USB-C port." },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "color", "id": "bg", "label": "Card colour", "default": "#CDEBDD" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "DUET how it works" }]
+}
+{% endschema %}
