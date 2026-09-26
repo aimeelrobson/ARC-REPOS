@@ -1,0 +1,195 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Serif;src:url(node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:Serif;font-style:italic;src:url(node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2) format('woff2')}
+@font-face{font-family:Sans;src:url(node_modules/@fontsource-variable/outfit/files/outfit-latin-wght-normal.woff2) format('woff2');font-weight:100 900}
+:root{--cream:#F8F1EA;--taupe:#C4A594;--ink:#141214;--blush:#F7C6D3;--pink:#FF6FA5;--butter:#FFE07A;--sage:#BFD0A6;--mocha:#8C6A58;--rec:#FF3B30}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:Sans,sans-serif;color:var(--ink)}
+.abs{position:absolute}
+.serif{font-family:Serif;font-weight:400;letter-spacing:-.02em;line-height:.95}
+.it{font-style:italic}
+.caps{font-family:Sans;font-weight:600;text-transform:uppercase;letter-spacing:.22em;font-size:30px}
+.pill{white-space:nowrap;border-radius:999px;padding:22px 48px;font-weight:600;font-size:44px;letter-spacing:.01em}
+.sticker{white-space:nowrap;border-radius:28px;padding:18px 40px 26px;font-family:Serif;font-style:italic;font-size:104px;letter-spacing:-.02em;line-height:1;box-shadow:0 14px 0 rgba(20,18,20,.18)}
+.clip{overflow:hidden}
+.clip img{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:0 0;max-width:none}
+.logo{-webkit-mask:url(assets/logo.png) center/contain no-repeat;mask:url(assets/logo.png) center/contain no-repeat}
+.ring{border-radius:50%;border:10px solid var(--butter);pointer-events:none}
+</style></head>
+<body><div id="stage"></div>
+<script>
+const st=document.getElementById('stage');
+const $=h=>{const d=document.createElement('div');d.innerHTML=h.trim();return d.firstChild};
+const add=(...e)=>{e.forEach(x=>st.append(x));return e[0]};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const p=(t,a,b)=>cl((t-a)/(b-a));
+const eo=x=>1-Math.pow(1-x,3);
+const eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const eb=x=>{const c1=1.7,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const lerp=(a,b,x)=>a+(b-a)*x;
+const vis=(el,on)=>el.style.display=on?'':'none';
+function place(el,{x=540,y=960,s=1,r=0,o=1}){el.style.left=x+'px';el.style.top=y+'px';el.style.transform=`translate(-50%,-50%) rotate(${r}deg) scale(${s})`;el.style.opacity=o}
+let TRACK={};
+const COUNT={kitchen:144,bench:144,baking:144,car:144,case:145,desk:145,pinktea:145,pinkclose:145,noir:145,pinkwin:145};
+
+/* footage window: container (x,y,w,h), 1080x1920 frames, zoom about a focus point */
+class Clip{
+  constructor(name,{x=0,y=0,w=1080,h=1920,r=0,py=.5}={}){
+    Object.assign(this,{name,x,y,w,h,py});
+    this.el=$(`<div class="abs clip" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;border-radius:${r}px"><img></div>`);
+    this.img=this.el.querySelector('img');
+    this.s0=Math.max(w/1080,h/1920);this.t0x=(w-1080*this.s0)/2;this.t0y=(h-1920*this.s0)*py;
+  }
+  set(f,zoom=1,fx=540,fy=960){
+    f=Math.max(1,Math.min(COUNT[this.name],Math.round(f)));this.f=f;
+    const src=`clips/${this.name}/${String(f).padStart(4,'0')}.jpg`;
+    if(this.img.getAttribute('src')!==src)this.img.setAttribute('src',src);
+    const s=this.s0*zoom;this.s=s;
+    this.tx=this.t0x+this.s0*fx-s*fx;this.ty=this.t0y+this.s0*fy-s*fy;
+    this.img.style.transform=`translate(${this.tx}px,${this.ty}px) scale(${s})`;
+  }
+  mic(){const q=TRACK[this.name][this.f-1];return [this.x+this.tx+this.s*q[0],this.y+this.ty+this.s*q[1]]}
+}
+function ring(color='var(--butter)'){return [0,1].map(()=>$(`<div class="abs ring" style="border-color:${color}"></div>`))}
+function setRing(rs,xy,t,on=true){rs.forEach((r,i)=>{const k=(t*1.4+i*.5)%1,d=90+k*170;r.style.width=r.style.height=d+'px';r.style.left=xy[0]+'px';r.style.top=xy[1]+'px';r.style.transform='translate(-50%,-50%)';r.style.opacity=on?(1-k):0})}
+
+/* shared end card: logo + promise + CTA */
+function endCard({bg,fg,pillBg,pillFg,line='Two mics · One receiver · No app'}){
+  const bgEl=add($(`<div class="abs" style="left:0;top:0;width:1080px;height:1920px;background:${bg}"></div>`));
+  const lg=add($(`<div class="abs logo" style="width:760px;height:203px;background:${fg}"></div>`));
+  const ln=add($(`<div class="abs caps" style="color:${fg};white-space:nowrap;font-size:32px">${line}</div>`));
+  const pl=add($(`<div class="abs pill" style="background:${pillBg};color:${pillFg}">Shop the kit — duet.nz</div>`));
+  const pr=add($(`<div class="abs serif it" style="color:${fg};font-size:64px;white-space:nowrap">kits from $69 NZD</div>`));
+  return (t,s)=>{
+    const w=eio(p(t,s,s+.35));bgEl.style.clipPath=`inset(${(1-w)*100}% 0 0 0)`;vis(bgEl,t>=s);
+    const a=eb(p(t,s+.2,s+.6));place(lg,{y:800,s:.85+.15*a,o:cl(a*2)});
+    place(ln,{y:980,o:eo(p(t,s+.4,s+.7))});
+    const b=eb(p(t,s+.5,s+.85));place(pl,{y:1130,s:b,o:cl(b*2)});
+    place(pr,{y:1260,o:eo(p(t,s+.65,s+.95))});
+  }}
+
+const scenes={};
+
+/* 1 · ROOM FOR TWO VOICES — split-screen duet */
+scenes[1]=()=>{
+  st.style.background='var(--cream)';
+  const hd=add($(`<div class="abs serif" style="font-size:140px;text-align:center;white-space:nowrap;line-height:.92">Room for<br><span class="it" style="color:var(--pink)">two voices.</span></div>`));
+  const A=new Clip('baking',{x:40,y:370,w:1000,h:720,r:44,py:.12});
+  const B=new Clip('bench',{x:40,y:1115,w:1000,h:720,r:44,py:.47});
+  add(A.el,B.el);
+  const sA=add($(`<div class="abs sticker" style="background:var(--pink);color:var(--cream)">voice one</div>`));
+  const sB=add($(`<div class="abs sticker" style="background:var(--butter)">voice two</div>`));
+  const rg=ring();add(...rg);
+  const end=endCard({bg:'var(--blush)',fg:'var(--ink)',pillBg:'var(--ink)',pillFg:'var(--cream)'});
+  return t=>{
+    const out=eio(p(t,2.95,3.4));
+    const a=eo(p(t,.05,.55)),b=eo(p(t,.2,.7));
+    A.set(20+t*30,1+t*.03,540,760);B.set(40+t*30,1,540,1000);
+    A.el.style.transform=`translateX(${(1-a)*-1100+out*-1100}px)`;
+    B.el.style.transform=`translateX(${(1-b)*1100+out*1100}px)`;
+    const h=eo(p(t,.3,.75));place(hd,{y:195-30*(1-h)-out*300,o:h});
+    const k1=eb(p(t,.8,1.1));place(sA,{x:320-out*1100,y:1020,s:k1,r:-5,o:cl(k1*2)});
+    const k2=eb(p(t,1.3,1.6));place(sB,{x:760+out*1100,y:1780,s:k2,r:4,o:cl(k2*2)});
+    const m=B.mic();setRing(rg,[m[0]+(1-b)*1100+out*1100,m[1]],t,t>1.4&&t<3);
+    end(t,3.3);
+  }};
+
+/* 2 · NO APP. NO PAIRING. — colour-block stamps into real use */
+scenes[2]=()=>{
+  const segs=[['var(--pink)','No app.','var(--cream)','blush'],['var(--butter)','No pairing.','var(--ink)','cloud'],['var(--sage)','Just plug in.','var(--ink)','noir']];
+  const words=segs.map(s=>add($(`<div class="abs serif" style="font-size:210px;color:${s[2]};white-space:nowrap">${s[1]}</div>`)));
+  const kits=segs.map(s=>add($(`<div class="abs" style="width:840px;height:840px;background:url(assets/kit-${s[3]}.png) center/contain no-repeat"></div>`)));
+  const C=new Clip('kitchen');add(C.el);
+  const rg=ring();add(...rg);
+  const rec=add($(`<div class="abs" style="display:flex;align-items:center;gap:16px;background:rgba(20,18,20,.55);color:#fff;padding:16px 32px;border-radius:40px;font-weight:600;font-size:40px;letter-spacing:.08em"><span class="dot" style="width:24px;height:24px;border-radius:50%;background:var(--rec)"></span>REC <span class="tm">00:00</span></div>`));
+  const cap=add($(`<div class="abs sticker" style="background:var(--cream)">& press record.</div>`));
+  const end=endCard({bg:'var(--ink)',fg:'var(--cream)',pillBg:'var(--pink)',pillFg:'var(--ink)'});
+  return t=>{
+    const i=t<.95?0:t<1.9?1:t<2.85?2:3;
+    if(i<3)st.style.background=segs[i][0];
+    words.forEach((w,k)=>{const lt=t-k*.95;const a=eb(p(lt,0,.25));place(w,{y:470,s:1.18-.18*a,o:k===i?1:0})});
+    kits.forEach((el,k)=>{const lt=t-k*.95;const a=eb(p(lt,.05,.45));place(el,{y:1230+(1-a)*500+Math.sin(t*5)*10,r:(1-a)*20+(k-1)*-6,o:k===i?1:0})});
+    vis(C.el,i===3);C.set(50+(t-2.85)*30,1+(t-2.85)*.05,560,950);
+    setRing(rg,C.mic(),t,i===3);
+    vis(rec,i===3);place(rec,{x:260,y:150});rec.querySelector('.dot').style.opacity=Math.floor(t*3)%2?.3:1;rec.querySelector('.tm').textContent='00:0'+Math.floor((t-2.85)*2+1);
+    const c=eb(p(t,2.95,3.25));vis(cap,i===3);place(cap,{y:1640,s:c,r:-3,o:cl(c*2)});
+    end(t,3.75);
+  }};
+
+/* 3 · WHICH ONE'S YOU? — three colourways */
+scenes[3]=()=>{
+  const cw=[['var(--blush)','Noir.','noir'],['var(--sage)','Cloud.','cloud'],['var(--butter)','Blush.','blush']];
+  const lab=add($(`<div class="abs caps">The DUET kit in</div>`));
+  const cnt=add($(`<div class="abs caps" style="font-size:28px"></div>`));
+  const names=cw.map(c=>add($(`<div class="abs serif it" style="font-size:300px;white-space:nowrap">${c[1]}</div>`)));
+  const kits=cw.map(c=>add($(`<div class="abs" style="width:880px;height:880px;background:url(assets/kit-${c[2]}.png) center/contain no-repeat"></div>`)));
+  const fin=add($(`<div class="abs" style="left:0;top:0;width:1080px;height:1920px;background:var(--cream)"></div>`));
+  const q=add($(`<div class="abs serif" style="font-size:150px;white-space:nowrap">Which one's <span class="it" style="color:var(--pink)">you?</span></div>`));
+  const minis=cw.map(c=>add($(`<div class="abs" style="width:330px;height:330px;background:url(assets/kit-${c[2]}.png) center/contain no-repeat"></div>`)));
+  const tags=cw.map((c,k)=>add($(`<div class="abs pill" style="background:${c[0]};font-size:38px;padding:14px 34px">${c[1].replace('.','')}</div>`)));
+  const cm=add($(`<div class="abs caps" style="font-size:30px;white-space:nowrap">Tell us in the comments</div>`));
+  const url=add($(`<div class="abs pill" style="background:var(--ink);color:var(--cream)">Shop the kit — duet.nz</div>`));
+  const lg=add($(`<div class="abs logo" style="width:360px;height:96px;background:var(--ink)"></div>`));
+  return t=>{
+    const i=Math.min(2,Math.floor(t/1.05));st.style.background=cw[i][0];
+    place(lab,{y:300,o:t<3.15?1:0});cnt.textContent=`0${i+1} / 03`;place(cnt,{y:1780,o:t<3.15?1:0});
+    names.forEach((n,k)=>{const a=eo(p(t-k*1.05,0,.3));place(n,{y:470+40*(1-a),o:k===i?a:0})});
+    kits.forEach((el,k)=>{const a=eb(p(t-k*1.05,.05,.45));place(el,{y:1170,s:.7+.3*a,r:(1-a)*-14+Math.sin(t*4)*2,o:k===i?cl(a*2):0})});
+    const f=eio(p(t,3.1,3.4));vis(fin,t>=3.1);fin.style.clipPath=`circle(${f*1500}px at 540px 1170px)`;
+    const on=t>=3.1;
+    const qa=eo(p(t,3.3,3.65));place(q,{y:520+30*(1-qa),o:on?qa:0});
+    minis.forEach((m,k)=>{const a=eb(p(t,3.4+k*.1,3.75+k*.1));place(m,{x:200+k*340,y:900,s:a,r:[-6,3,7][k],o:on?cl(a*2):0});
+      place(tags[k],{x:200+k*340,y:1110,s:a,o:on?cl(a*2):0})});
+    place(cm,{y:1260,o:on?eo(p(t,3.8,4.1)):0});
+    const u=eb(p(t,3.95,4.3));place(url,{y:1420,s:u,o:on?cl(u*2):0});
+    place(lg,{y:1740,o:on?eo(p(t,4.1,4.4)):0});
+  }};
+
+/* 4 · MADE FOR THE WAY YOU FILM — framed 4-cut montage */
+scenes[4]=()=>{
+  const shots=[['kitchen','var(--blush)','kitchen vlogs.','var(--pink)','var(--cream)',40,[560,950]],['bench','var(--butter)','street interviews.','var(--butter)','var(--ink)',50,[440,1050]],['baking','var(--sage)','bake-alongs.','var(--sage)','var(--ink)',40,[540,800]],['car','var(--pink)','car chats.','var(--cream)','var(--ink)',75,[900,1400]]];
+  const C=shots.map(s=>new Clip(s[0],{x:36,y:36,w:1008,h:1848,r:48}));C.forEach(c=>add(c.el));
+  const rg=ring('var(--cream)');add(...rg);
+  const top=add($(`<div class="abs caps" style="background:var(--cream);padding:16px 30px;border-radius:999px;font-size:28px;white-space:nowrap">Made for the way you film</div>`));
+  const stk=shots.map(s=>add($(`<div class="abs sticker" style="background:${s[3]};color:${s[4]}">${s[2]}</div>`)));
+  const end=endCard({bg:'var(--ink)',fg:'var(--cream)',pillBg:'var(--butter)',pillFg:'var(--ink)'});
+  return t=>{
+    const i=Math.min(3,Math.floor(t/.9));st.style.background=shots[i][1];
+    C.forEach((c,k)=>{vis(c.el,k===i);if(k===i){const lt=t-k*.9;c.set(shots[k][5]+lt*30,1.04+lt*.08,...shots[k][6])}});
+    setRing(rg,C[i].name!=='baking'?C[i].mic():[0,0],t,C[i].name!=='baking'&&t<3.6);
+    place(top,{y:130,o:eo(p(t,.1,.4))});
+    stk.forEach((s,k)=>{const a=eb(p(t-k*.9,.08,.35));place(s,{y:1660,s:a,r:k%2?3:-3,o:k===i?cl(a*2):0})});
+    end(t,3.6);
+  }};
+
+/* 5 · CAN YOU HEAR ME? — fast hook, real proof */
+scenes[5]=()=>{
+  st.style.background='var(--ink)';
+  const W=[['Can',180,'var(--cream)',''],['you',330,'var(--cream)',''],['hear',480,'var(--cream)',''],['me?',640,'var(--pink)','it']];
+  const ws=W.map(w=>add($(`<div class="abs serif ${w[3]}" style="font-size:260px;color:${w[2]};white-space:nowrap">${w[0]}</div>`)));
+  const B=new Clip('bench'),Cc=new Clip('car');add(B.el,Cc.el);
+  const rg=ring();add(...rg);
+  const s1=add($(`<div class="abs sticker" style="background:var(--butter)">Loud & clear.</div>`));
+  const s2=add($(`<div class="abs sticker" style="background:var(--pink);color:var(--cream)">Even in here.</div>`));
+  const end=endCard({bg:'var(--blush)',fg:'var(--ink)',pillBg:'var(--ink)',pillFg:'var(--cream)'});
+  return t=>{
+    ws.forEach((w,k)=>{const a=eb(p(t,.1+k*.22,.3+k*.22));w.style.left=W[k][1]+'px';w.style.top=(560+k*230)+'px';w.style.transform=`translate(-10%,-50%) scale(${.85+.15*a})`;w.style.opacity=cl(a*2)});
+    const b=t>=1.3&&t<2.5,c=t>=2.5&&t<3.7;vis(B.el,b);vis(Cc.el,c);
+    let lt=t-1.3;{const q=TRACK.bench[Math.round(60+lt*30)-1]||[480,1067];B.set(60+lt*30,1+eo(p(lt,0,1.2))*.35,q[0],q[1])}
+    lt=t-2.5;{const q=TRACK.car[Math.round(80+lt*30)-1]||[900,1400];Cc.set(80+lt*30,1+eo(p(lt,0,1.2))*.3,q[0],q[1])}
+    setRing(rg,b?B.mic():Cc.mic(),t,b||c);
+    const a1=eb(p(t,1.5,1.8));vis(s1,b);place(s1,{y:520,s:a1,r:-4,o:cl(a1*2)});
+    const a2=eb(p(t,2.65,2.95));vis(s2,c);place(s2,{y:480,s:a2,r:3,o:cl(a2*2)});
+    end(t,3.65);
+  }};
+
+const v=+(new URLSearchParams(location.search).get('v')||1);
+let render;
+window.seek=async t=>{render(t);await Promise.all([...st.querySelectorAll('img')].filter(i=>i.offsetParent!==null&&i.getAttribute('src')).map(i=>i.decode().catch(()=>{})))};
+fetch('track.json').then(r=>r.json()).then(j=>{TRACK=j;render=scenes[v]();return document.fonts.ready}).then(async()=>{
+  const pre=['kit-noir','kit-cloud','kit-blush','logo'].map(n=>{const i=new Image();i.src=`assets/${n}.png`;return i.decode()});await Promise.all(pre);
+  render(0);window.ready=true});
+</script></body></html>
