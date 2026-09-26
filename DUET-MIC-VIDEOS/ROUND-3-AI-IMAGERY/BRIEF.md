@@ -4,7 +4,7 @@ Brand: DUET (duet.nz, NZ). Wireless clip-on mic kits — two mics, one USB-C rec
 Colourways: Blush (pink body, white foam head, pink fluffy windshield), Cloud (white), Noir (black).
 Product: thumb-sized rounded-rectangle body, rounded-square foam head, large square front button, tiny green LED, back clip; small matching USB-C receiver; fluffy faux-fur windshields.
 
-Tool: Gemini API (Nano Banana image model) via GEMINI_API_KEY env var. Always pass PRODUCT-PHOTOS as reference images so the mics stay accurate.
+Tool: Gemini API (Nano Banana image model) at generativelanguage.googleapis.com. The key is injected automatically as an x-goog-api-key header by an environment credential; do not look for an env var or send a key yourself. Always pass PRODUCT-PHOTOS as reference images so the mics stay accurate.
 
 ## Art direction v1
 - FEELING: chic, witty, a little absurd. Premium, never cheap-kitsch. Younger, cooler, aspirational.
