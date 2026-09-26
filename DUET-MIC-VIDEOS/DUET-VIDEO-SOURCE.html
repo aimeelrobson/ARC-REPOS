@@ -1,0 +1,214 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Brico;src:url(node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-standard-normal.woff2) format('woff2');font-weight:200 800;font-stretch:75% 100%}
+@font-face{font-family:Serif;font-style:italic;src:url(node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2) format('woff2')}
+:root{--pink:#FF4FA3;--tang:#FF6B1A;--lime:#C8F43A;--cob:#2B44FF;--lilac:#C8B8FF;--cream:#FFF3E4;--ink:#161213;--skin:#C98B6B;--skin2:#B57656}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:Brico,sans-serif;color:var(--ink)}
+.abs{position:absolute}
+.c{left:50%;top:50%;transform:translate(-50%,-50%)}
+.h{font-weight:800;letter-spacing:-0.045em;line-height:.9;font-stretch:88%}
+.s{font-family:Serif;font-style:italic;font-weight:400;letter-spacing:-0.01em}
+.pill{white-space:nowrap;border-radius:999px;padding:22px 46px;font-weight:700;font-size:54px;letter-spacing:-.02em}
+svg{display:block;overflow:visible}
+</style></head>
+<body><div id="stage"></div>
+<script>
+const W=1080,H=1920,DUR=5;
+const $=(h)=>{const d=document.createElement('div');d.innerHTML=h.trim();return d.firstChild};
+const st=document.getElementById('stage');
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const p=(t,a,b)=>cl((t-a)/(b-a));
+const eo=x=>1-Math.pow(1-x,3);
+const eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const eb=x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const lerp=(a,b,x)=>a+(b-a)*x;
+const hash=n=>{const s=Math.sin(n*127.1)*43758.5453;return s-Math.floor(s)};
+
+/* ---------- illustrations ---------- */
+let uid=0;
+function mic(body='#161213',grille='#2c2628',led='#C8F43A'){
+  const id='g'+(uid++);
+  let dots='';for(let y=-50;y<=50;y+=12)for(let x=-50;x<=50;x+=12){if(x*x+y*y<50*50)dots+=`<circle cx="${100+x}" cy="${128+y}" r="3.2" fill="rgba(255,255,255,.18)"/>`}
+  return `<svg viewBox="0 0 200 250" width="100%" height="100%">
+   <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+   <rect x="62" y="0" width="76" height="80" rx="16" fill="${body}" opacity=".85"/>
+   <rect x="74" y="10" width="52" height="10" rx="5" fill="rgba(255,255,255,.25)"/>
+   <rect x="10" y="34" width="180" height="206" rx="60" fill="${body}"/>
+   <circle cx="100" cy="128" r="62" fill="${grille}"/>${dots}
+   <circle cx="100" cy="214" r="7" fill="${led}"/>
+   <rect x="10" y="34" width="180" height="206" rx="60" fill="url(#${id})"/>
+  </svg>`}
+function collar(tee='#FF4FA3',skin='var(--skin)',skin2='var(--skin2)'){
+  return `<svg viewBox="0 0 1000 900" width="100%" height="100%">
+   <path d="M380 0 H620 V330 Q500 400 380 330Z" fill="${skin}"/>
+   <path d="M380 250 Q500 330 620 250 V330 Q500 400 380 330Z" fill="${skin2}"/>
+   <path d="M0 520 Q60 380 300 330 Q360 318 380 300 Q500 440 620 300 Q640 318 700 330 Q940 380 1000 520 V900 H0Z" fill="${tee}"/>
+   <path d="M380 300 Q500 440 620 300" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="26" stroke-linecap="round"/>
+   <path d="M170 900 Q190 650 250 560 M830 900 Q810 650 750 560" fill="none" stroke="rgba(0,0,0,.08)" stroke-width="10" stroke-linecap="round"/>
+  </svg>`}
+function rings(color){return `<svg viewBox="-300 -300 600 600" width="100%" height="100%">${[0,1,2,3].map(i=>`<circle class="rg" data-i="${i}" r="100" fill="none" stroke="${color}" stroke-width="14"/>`).join('')}</svg>`}
+function setRings(el,t,speed=1){el.querySelectorAll('.rg').forEach(c=>{const i=+c.dataset.i;const k=((t*speed+i*.25)%1);c.setAttribute('r',40+k*250);c.setAttribute('opacity',(1-k)*.9)})}
+const logo=(dot='var(--pink)',col='var(--ink)',size=260)=>`<div class="h" style="font-size:${size}px;color:${col}">duet<span style="color:${dot}">.</span></div>`;
+
+function place(el,{x=540,y=960,w,s=1,r=0,o=1}){el.style.left=x+'px';el.style.top=y+'px';if(w)el.style.width=w+'px';el.style.transform=`translate(-50%,-50%) rotate(${r}deg) scale(${s})`;el.style.opacity=o}
+
+/* ---------- scenes ---------- */
+const scenes={};
+
+/* 1 · POP — product hero, Origins-style float */
+scenes[1]=()=>{
+  st.style.background='var(--tang)';
+  const wipe=$(`<div class="abs" style="border-radius:50%;background:var(--pink)"></div>`);
+  const t1=$(`<div class="abs h" style="font-size:180px;text-align:center;color:var(--cream);width:1000px">Tiny mic.</div>`);
+  const t2=$(`<div class="abs h" style="font-size:180px;text-align:center;color:var(--cream);width:1000px">Big <span class="s" style="font-size:210px">voice.</span></div>`);
+  const rA=$(`<div class="abs" style="width:700px;height:700px">${rings('#FFF3E4')}</div>`);
+  const rB=$(`<div class="abs" style="width:700px;height:700px">${rings('#FFF3E4')}</div>`);
+  const mA=$(`<div class="abs" style="width:330px;height:412px">${mic()}</div>`);
+  const mB=$(`<div class="abs" style="width:330px;height:412px">${mic('#F4EFE8','#D9D1C7','#FF4FA3')}</div>`);
+  const lg=$(`<div class="abs">${logo('var(--lime)','var(--cream)',300)}</div>`);
+  const tag=$(`<div class="abs pill" style="background:var(--ink);color:var(--cream)">wireless mini mics · duet.nz</div>`);
+  [wipe,rA,rB,mA,mB,t1,t2,lg,tag].forEach(e=>st.append(e));
+  return t=>{
+    const inA=eb(p(t,.1,.8)),inB=eb(p(t,.25,.95));
+    const out=eio(p(t,3.3,3.9));
+    const bob=Math.sin(t*3)*14;
+    place(mA,{x:lerp(330,300,out),y:lerp(2300,1060,inA)+bob-out*1700,r:-14+Math.sin(t*2)*3});
+    place(mB,{x:lerp(750,780,out),y:lerp(2400,1160,inB)-bob-out*1800,r:12-Math.sin(t*2)*3});
+    const talk=p(t,1.7,1.8)*(1-p(t,3.2,3.3));
+    place(rA,{x:300,y:1080,o:talk});setRings(rA,t,.9);
+    place(rB,{x:780,y:1180,o:talk});setRings(rB,t+.4,.9);
+    const a1=eo(p(t,.35,.8))*(1-p(t,1.5,1.7));
+    place(t1,{y:560-40*(1-a1),o:a1});
+    const a2=eb(p(t,1.7,2.1))*(1-p(t,3.3,3.5));
+    place(t2,{y:560,s:.8+.2*a2,o:cl(a2)});
+    const w=eio(p(t,3.2,3.8))*2600;
+    place(wipe,{x:540,y:1160,w});wipe.style.height=w+'px';
+    const l=eb(p(t,3.65,4.15));place(lg,{y:880,s:.6+.4*l,o:cl(l*2)});
+    const g=eo(p(t,3.95,4.35));place(tag,{y:1180+60*(1-g),o:g});
+  }};
+
+/* 2 · WORD SWAP — clip / talk / post */
+scenes[2]=()=>{
+  const words=[['CLIP','var(--lime)','#2B44FF'],['TALK','var(--pink)','#FFF3E4'],['POST','var(--cob)','#FF6B1A']];
+  const W1=words.map(w=>$(`<div class="abs h" style="font-size:420px;color:var(--ink)">${w[0]}</div>`));
+  W1[2].style.color='var(--cream)';
+  const col=$(`<div class="abs" style="width:1180px;height:1062px"></div>`);
+  const rr=$(`<div class="abs" style="width:720px;height:720px">${rings('#FFF3E4')}</div>`);
+  const m=$(`<div class="abs" style="width:150px;height:188px">${mic()}</div>`);
+  const heart=$(`<div class="abs pill" style="background:var(--cream);color:var(--ink);font-size:64px;box-shadow:0 20px 0 rgba(0,0,0,.15)"><span style="color:var(--pink)">♥</span> <span class="n">0</span></div>`);
+  const end=$(`<div class="abs" style="left:0;top:0;width:1080px;height:1920px;background:var(--cream)"></div>`);
+  const lg=$(`<div class="abs">${logo('var(--pink)')}</div>`);
+  const sub=$(`<div class="abs s" style="font-size:96px;white-space:nowrap">clip it. say it.</div>`);
+  const url=$(`<div class="abs pill" style="background:var(--ink);color:var(--lime)">duet.nz</div>`);
+  [...W1,col,rr,m,heart,end,lg,sub,url].forEach(e=>st.append(e));
+  let last=-1;
+  return t=>{
+    const i=Math.min(2,Math.floor(t/1.2));
+    if(i!==last){st.style.background=words[i][1];col.innerHTML=collar(words[i][2]);last=i}
+    W1.forEach((w,k)=>{const lt=t-k*1.2;const vis=k===i&&t<3.6;const s=eb(p(lt,0,.3));place(w,{y:560,s:1.25-.25*s,o:vis?1:0,r:k===1?-4:k===2?3:0})});
+    place(col,{y:1420+Math.sin(t*2.2)*6});
+    const snap=eb(p(t,.15,.55));
+    place(m,{x:640,y:lerp(700,1240,snap),r:lerp(40,-6,snap)});
+    place(rr,{x:640,y:1240,o:(t>1.2&&t<2.4)?1:0});setRings(rr,t,1.3);
+    const hp=eb(p(t,2.55,2.85));place(heart,{x:760,y:1000,s:hp,o:t>2.4&&t<3.6?1:0,r:-6});
+    heart.querySelector('.n').textContent=(Math.round(eo(p(t,2.6,3.5))*124)/10).toFixed(1)+'k';
+    const e=eio(p(t,3.55,3.85));end.style.clipPath=`inset(${(1-e)*100}% 0 0 0)`;
+    const l=eb(p(t,3.75,4.15));place(lg,{y:820,s:.7+.3*l,o:cl(l*2)});
+    place(sub,{y:1010,o:eo(p(t,3.95,4.3))});
+    const u=eb(p(t,4.1,4.45));place(url,{y:1180,s:u,o:cl(u*2)});
+  }};
+
+/* 3 · BENTO — one mic, every story */
+scenes[3]=()=>{
+  st.style.background='var(--cream)';
+  const icons={
+    vlog:`<svg viewBox="0 0 100 100" width="150"><rect x="28" y="8" width="44" height="84" rx="10" fill="none" stroke="#161213" stroke-width="7"/><path d="M44 38 L60 50 L44 62Z" fill="#161213"/></svg>`,
+    pod:`<svg viewBox="0 0 100 100" width="160"><path d="M16 62 V50 a34 34 0 0 1 68 0 V62" fill="none" stroke="#FFF3E4" stroke-width="8"/><rect x="10" y="56" width="20" height="30" rx="7" fill="#FFF3E4"/><rect x="70" y="56" width="20" height="30" rx="7" fill="#FFF3E4"/></svg>`,
+    grwm:`<svg viewBox="0 0 100 100" width="150"><ellipse cx="50" cy="44" rx="28" ry="36" fill="none" stroke="#161213" stroke-width="7"/><path d="M50 80 V94 M36 94 H64" stroke="#161213" stroke-width="7" stroke-linecap="round"/><path d="M78 10 l4 9 9 4 -9 4 -4 9 -4 -9 -9 -4 9 -4z" fill="#161213"/></svg>`,
+    int:`<svg viewBox="0 0 100 100" width="160"><path d="M8 14 h50 a8 8 0 0 1 8 8 v22 a8 8 0 0 1 -8 8 h-30 l-12 12 v-12 h-8 a8 8 0 0 1 -8 -8 v-22 a8 8 0 0 1 8 -8z" fill="#FFF3E4"/><path d="M92 44 h-40 a8 8 0 0 0 -8 8 v18 a8 8 0 0 0 8 8 h24 l10 10 v-10 h6 a8 8 0 0 0 8 -8 v-18 a8 8 0 0 0 -8 -8z" fill="#161213"/></svg>`};
+  const T=[['vlogs','var(--pink)','vlog','var(--ink)',-12],['podcasts','var(--cob)','pod','var(--cream)',10],['GRWM','var(--lime)','grwm','var(--ink)',8],['interviews','var(--tang)','int','var(--ink)',-9]];
+  const pos=[[285,780],[795,780],[285,1300],[795,1300]];
+  const tiles=T.map(([lab,bg,ic,fg,rot],k)=>{const el=$(`<div class="abs" style="width:480px;height:480px;border-radius:56px;background:${bg};color:${fg}">
+     <div class="abs" style="left:48px;top:48px">${icons[ic]}</div>
+     <div class="abs mm" style="right:44px;top:44px;width:120px;height:150px;transform:rotate(${rot}deg)">${k%2?mic('#F4EFE8','#D9D1C7','#FF4FA3'):mic()}</div>
+     <div class="abs h" style="left:48px;bottom:44px;font-size:${lab.length>8?76:92}px">${lab}</div></div>`);st.append(el);return el});
+  const top=$(`<div class="abs h" style="font-size:132px;white-space:nowrap">One tiny mic.</div>`);
+  const bot=$(`<div class="abs s" style="font-size:150px;white-space:nowrap">every story.</div>`);
+  const lg=$(`<div class="abs">${logo('var(--tang)')}</div>`);
+  const url=$(`<div class="abs pill" style="background:var(--pink);color:var(--cream)">shop duet.nz</div>`);
+  [top,bot,lg,url].forEach(e=>st.append(e));
+  return t=>{
+    const out=eio(p(t,3.5,4.0));
+    tiles.forEach((el,k)=>{const a=eb(p(t,.25+k*.14,.7+k*.14));
+      const [x,y]=pos[k];const hover=(Math.floor(t/.55)%4===k&&t>1.3&&t<3.4)?1.04:1;
+      place(el,{x:lerp(x,540,out),y:lerp(y,1040,out),s:a*hover*(1-out*.85),o:cl(a*3)*(1-out),r:(1-a)*(k%2?8:-8)+out*(k-1.5)*20});
+      el.querySelector('.mm').style.transform=`rotate(${(k%2?10:-12)+Math.sin(t*4+k)*6}deg)`});
+    place(top,{y:410,o:eo(p(t,.05,.4))*(1-out),s:1});
+    place(bot,{y:1660,o:eo(p(t,1.2,1.6))*(1-out),s:.9+.1*eo(p(t,1.2,1.6))});
+    const l=eb(p(t,3.8,4.25));place(lg,{y:880,s:.6+.4*l,o:cl(l*2)});
+    const u=eb(p(t,4.05,4.4));place(url,{y:1090,s:u,o:cl(u*2)});
+  }};
+
+/* 4 · SNAP — collar close-up, clip + rings */
+scenes[4]=()=>{
+  st.style.background='var(--lilac)';
+  const col=$(`<div class="abs" style="width:2200px;height:1980px">${collar('#FF6B1A')}</div>`);
+  const rr=$(`<div class="abs" style="width:1300px;height:1300px">${rings('#C8F43A')}</div>`);
+  const m=$(`<div class="abs" style="width:300px;height:375px">${mic()}</div>`);
+  const click=$(`<div class="abs h" style="font-size:110px;background:var(--lime);padding:18px 40px;border-radius:30px;color:var(--ink)">click!</div>`);
+  const lines=['Clip.','Talk.'].map(s=>$(`<div class="abs h" style="font-size:210px;color:var(--ink)">${s}</div>`));
+  const cc=$(`<div class="abs s" style="font-size:190px;color:var(--ink);white-space:nowrap">crystal clear.</div>`);
+  const url=$(`<div class="abs pill" style="background:var(--ink);color:var(--cream)">duet.nz</div>`);
+  [col,rr,m,click,...lines,cc,url].forEach(e=>st.append(e));
+  return t=>{
+    const zoom=lerp(1,1.06,eio(p(t,0,5)));
+    place(col,{x:540,y:1560,s:zoom});
+    const d=p(t,.2,.9),sn=eo(d);
+    const squash=t>.9?1-.12*Math.sin(p(t,.9,1.25)*Math.PI):1;
+    place(m,{x:lerp(1250,700,sn),y:lerp(300,1290,sn)*1,r:lerp(70,-4,sn)});m.style.transform+=` scaleY(${squash}) scaleX(${2-squash})`;
+    const c=eb(p(t,.9,1.15))*(1-p(t,1.6,1.8));place(click,{x:880,y:1060,s:c,o:cl(c*3),r:8});
+    place(rr,{x:700,y:1290,o:p(t,1.1,1.3)});setRings(rr,t,1);
+    lines.forEach((l,k)=>{const a=eb(p(t,1.2+k*.35,1.55+k*.35));place(l,{x:lerp(-200,300,cl(a)),y:300+k*210,o:cl(a*2)});l.style.transform+='';l.style.left=(80+ (1-cl(a))*-400)+'px';l.style.transform=`translate(0,-50%) scale(${.9+.1*a})`});
+    const a3=eo(p(t,2.0,2.4));cc.style.left='80px';cc.style.top=(720+30*(1-a3))+'px';cc.style.opacity=a3;cc.style.transform='translate(0,-50%)';
+    const u=eb(p(t,3.6,4.0));place(url,{x:540,y:1820-60*u,s:u,o:cl(u*2)});
+  }};
+
+/* 5 · REC — phone frame, live recording UI */
+scenes[5]=()=>{
+  st.style.background='var(--cob)';
+  const t1=$(`<div class="abs h" style="font-size:150px;color:var(--cream);white-space:nowrap">Studio sound.</div>`);
+  const t2=$(`<div class="abs s" style="font-size:170px;color:var(--lime);white-space:nowrap">pocket size.</div>`);
+  let bars='';for(let i=0;i<22;i++)bars+=`<div class="bar" style="width:14px;border-radius:7px;background:var(--cream)"></div>`;
+  const ph=$(`<div class="abs" style="width:620px;height:1200px;border-radius:92px;background:var(--ink);padding:22px">
+    <div style="position:relative;width:100%;height:100%;border-radius:72px;overflow:hidden;background:linear-gradient(170deg,#FF4FA3,#FF6B1A)">
+      <div class="abs" style="left:-150px;bottom:-40px;width:880px;height:792px">${collar('#C8F43A')}</div>
+      <div class="abs mic" style="left:330px;top:790px;width:90px;height:112px">${mic()}</div>
+      <div class="abs" style="left:50%;top:26px;transform:translateX(-50%);width:170px;height:48px;border-radius:24px;background:var(--ink)"></div>
+      <div class="abs rec" style="left:40px;top:110px;display:flex;align-items:center;gap:14px;background:rgba(22,18,19,.55);color:#fff;padding:12px 26px;border-radius:40px;font-weight:700;font-size:40px"><span class="dot" style="width:22px;height:22px;border-radius:50%;background:#FF2D2D"></span><span class="tm">00:00</span></div>
+      <div class="abs" style="left:40px;right:40px;bottom:50px;height:140px;display:flex;align-items:center;justify-content:space-between;background:rgba(22,18,19,.55);border-radius:36px;padding:0 30px" id="wv">${bars}</div>
+    </div></div>`);
+  const lg=$(`<div class="abs">${logo('var(--lime)','var(--cream)',280)}</div>`);
+  const url=$(`<div class="abs pill" style="background:var(--lime);color:var(--ink)">duet.nz</div>`);
+  [ph,t1,t2,lg,url].forEach(e=>st.append(e));
+  const bs=[...ph.querySelectorAll('.bar')];
+  return t=>{
+    const a=eb(p(t,.1,.6)),out=eio(p(t,3.4,3.95));
+    place(ph,{y:lerp(2600,1010,a)+out*2200,r:lerp(8,-3,a)+out*10});
+    place(t1,{y:250-out*500,o:eo(p(t,.4,.8))});
+    const b=eb(p(t,1.0,1.4));place(t2,{y:1760+out*500,s:.8+.2*b,o:cl(b*2)});
+    ph.querySelector('.dot').style.opacity=(Math.floor(t*2.5)%2)?.25:1;
+    ph.querySelector('.tm').textContent='00:0'+Math.min(4,Math.floor(t));
+    const f=Math.floor(t*12);
+    bs.forEach((el,i)=>{const env=.35+.65*Math.abs(Math.sin(t*5+i*.4));el.style.height=(14+100*env*hash(f*31+i))+'px'});
+    const l=eb(p(t,3.75,4.2));place(lg,{y:880,s:.6+.4*l,o:cl(l*2)});
+    const u=eb(p(t,4.0,4.35));place(url,{y:1110,s:u,o:cl(u*2)});
+  }};
+
+const v=+(new URLSearchParams(location.search).get('v')||1);
+const render=scenes[v]();
+window.seek=t=>render(t);
+document.fonts.ready.then(()=>{render(0);window.ready=true});
+</script></body></html>
