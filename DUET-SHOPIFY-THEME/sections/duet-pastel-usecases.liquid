@@ -1,7 +1,7 @@
 {%- style -%}
   .dpu { background: var(--s-bg, #FDD3B8); color: var(--s-fg, #1C1517); padding-block: var(--s-pt, 72px) var(--s-pb, 72px); }
   .dpu__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 2.4rem; flex-wrap: wrap; margin-bottom: 3.6rem; }
-  .dpu__head h2 { font-size: clamp(4rem, 6vw, 6.8rem) !important; line-height: 1 !important; margin: 0; max-width: 18ch; }
+  .dpu__head h2 { font-size: clamp(calc(var(--hs, 68) * 0.59px), calc(var(--hs, 68) * 0.0882vw), calc(var(--hs, 68) * 1px)) !important; line-height: 1 !important; margin: 0; max-width: 18ch; }
   .dpu__head h2 em { font-style: italic; }
   .dpu__head p { font-size: 1.7rem; margin: 0; max-width: 38rem; }
   .dpu__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
@@ -22,7 +22,7 @@
   @media (prefers-reduced-motion: reduce) { .dpu__media img { transition: none; } .dpu__card:hover .dpu__media img { transform: none; } }
 {%- endstyle -%}
 
-<section class="dpu" style="--s-bg: {{ section.settings.s_bg }}; --s-fg: {{ section.settings.s_fg }}; --s-pt: {{ section.settings.s_pt }}px; --s-pb: {{ section.settings.s_pb }}px;" aria-labelledby="dpu-title-{{ section.id }}">
+<section class="dpu" style="--s-bg: {{ section.settings.s_bg }}; --s-fg: {{ section.settings.s_fg }}; --s-pt: {{ section.settings.s_pt }}px; --s-pb: {{ section.settings.s_pb }}px; --hs: {{ section.settings.heading_size }};" aria-labelledby="dpu-title-{{ section.id }}">
   <div class="page-width">
     <div class="dpu__head">
       <h2 id="dpu-title-{{ section.id }}">{{ section.settings.heading }}</h2>
@@ -62,6 +62,16 @@
     {
       "type": "header",
       "content": "Section style"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size (desktop)",
+      "min": 28,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 68
     },
     {
       "type": "color",

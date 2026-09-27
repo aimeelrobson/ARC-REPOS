@@ -1,7 +1,7 @@
 {%- style -%}
   .dpc { background: var(--s-bg, #fff); color: var(--s-fg, #1C1517); padding-block: var(--s-pt, 72px) var(--s-pb, 72px); }
-  .dpc__head { text-align: center; max-width: 64rem; margin: 0 auto 4rem; }
-  .dpc__head h2 { font-size: clamp(4rem, 6vw, 6.8rem) !important; line-height: 1 !important; margin: 0 0 1.2rem; }
+  .dpc__head { text-align: var(--ha, center); max-width: 64rem; margin: 0 auto 4rem; }
+  .dpc__head h2 { font-size: clamp(calc(var(--hs, 68) * 0.59px), calc(var(--hs, 68) * 0.0882vw), calc(var(--hs, 68) * 1px)) !important; line-height: 1 !important; margin: 0 0 1.2rem; }
   .dpc__head h2 em { font-style: italic; }
   .dpc__head p { font-size: 1.7rem; margin: 0; }
   .dpc__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4rem; }
@@ -26,7 +26,7 @@
   @media (prefers-reduced-motion: reduce) { .dpc__tile, .dpc__media img { transition: none; } .dpc__tile:hover { transform: none; } .dpc__tile:hover .dpc__media img { transform: none; } }
 {%- endstyle -%}
 
-<section class="dpc" style="--s-bg: {{ section.settings.s_bg }}; --s-fg: {{ section.settings.s_fg }}; --s-pt: {{ section.settings.s_pt }}px; --s-pb: {{ section.settings.s_pb }}px;" aria-labelledby="dpc-title-{{ section.id }}">
+<section class="dpc" style="--s-bg: {{ section.settings.s_bg }}; --s-fg: {{ section.settings.s_fg }}; --s-pt: {{ section.settings.s_pt }}px; --s-pb: {{ section.settings.s_pb }}px; --hs: {{ section.settings.heading_size }}; --ha: {{ section.settings.heading_align }};" aria-labelledby="dpc-title-{{ section.id }}">
   <div class="page-width">
     <div class="dpc__head">
       <h2 id="dpc-title-{{ section.id }}">{{ section.settings.heading }}</h2>
@@ -72,6 +72,36 @@
     {
       "type": "header",
       "content": "Section style"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size (desktop)",
+      "min": 28,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 68
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Heading alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
     },
     {
       "type": "color",

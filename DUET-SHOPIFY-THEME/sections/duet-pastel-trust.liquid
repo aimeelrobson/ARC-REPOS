@@ -1,6 +1,6 @@
 {%- style -%}
   .dpt { background: var(--s-bg, #1C1517); color: var(--s-fg, #FFF6F1); padding-block: var(--s-pt, 72px) var(--s-pb, 72px); }
-  .dpt__title { font-family: "Instrument Serif", Georgia, "Times New Roman", serif !important; font-weight: 400 !important; font-size: clamp(3.6rem, 5vw, 5.6rem) !important; line-height: 1 !important; color: var(--s-fg, #FFF6F1); margin: 0 0 3.6rem; text-wrap: balance; }
+  .dpt__title { text-align: var(--ha, left); font-family: "Instrument Serif", Georgia, "Times New Roman", serif !important; font-weight: 400 !important; font-size: clamp(calc(var(--hs, 56) * 0.643px), calc(var(--hs, 56) * 0.0893vw), calc(var(--hs, 56) * 1px)) !important; line-height: 1 !important; color: var(--s-fg, #FFF6F1); margin: 0 0 3.6rem; text-wrap: balance; }
   .dpt__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6rem; }
   .dpt__card { border-radius: 24px; padding: 2.8rem 2.4rem; color: var(--duet-ink, #1C1517); display: grid; gap: 0.8rem; align-content: start; }
   .dpt__card h3 { font-family: "Instrument Serif", Georgia, "Times New Roman", serif !important; font-weight: 400 !important; font-size: 2.8rem !important; line-height: 1.05 !important; margin: 0; color: var(--duet-ink, #1C1517); }
@@ -9,7 +9,7 @@
   @media screen and (max-width: 480px) { .dpt { padding-block: calc(var(--s-pt) * 0.75) calc(var(--s-pb) * 0.75); } .dpt__card { padding: 2rem 1.6rem; } .dpt__card h3 { font-size: 2.2rem !important; } }
 {%- endstyle -%}
 
-<section class="dpt" style="--s-bg: {{ section.settings.s_bg }}; --s-fg: {{ section.settings.s_fg }}; --s-pt: {{ section.settings.s_pt }}px; --s-pb: {{ section.settings.s_pb }}px;" aria-labelledby="dpt-title-{{ section.id }}">
+<section class="dpt" style="--s-bg: {{ section.settings.s_bg }}; --s-fg: {{ section.settings.s_fg }}; --s-pt: {{ section.settings.s_pt }}px; --s-pb: {{ section.settings.s_pb }}px; --hs: {{ section.settings.heading_size }}; --ha: {{ section.settings.heading_align }};" aria-labelledby="dpt-title-{{ section.id }}">
   <div class="page-width">
     <h2 class="dpt__title" id="dpt-title-{{ section.id }}">{{ section.settings.heading }}</h2>
     <ul class="dpt__grid">
@@ -36,6 +36,36 @@
     {
       "type": "header",
       "content": "Section style"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size (desktop)",
+      "min": 28,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Heading alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
     },
     {
       "type": "color",

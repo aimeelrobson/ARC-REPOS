@@ -1,7 +1,7 @@
 {%- style -%}
-  .dpx { background: var(--s-bg, #F7C6D6); color: var(--s-fg, #1C1517); padding-block: var(--s-pt, 96px) var(--s-pb, 96px); text-align: center; position: relative; overflow: hidden; }
+  .dpx { background: var(--s-bg, #F7C6D6); color: var(--s-fg, #1C1517); padding-block: var(--s-pt, 96px) var(--s-pb, 96px); text-align: var(--ha, center); position: relative; overflow: hidden; }
   .dpx__inner { position: relative; z-index: 1; max-width: 88rem; margin: 0 auto; }
-  .dpx__title { font-family: "Instrument Serif", Georgia, "Times New Roman", serif !important; font-weight: 400 !important; font-size: clamp(4.4rem, 7vw, 8.4rem) !important; line-height: 0.95 !important; letter-spacing: -0.01em; margin: 0 0 2rem; text-wrap: balance; }
+  .dpx__title { font-family: "Instrument Serif", Georgia, "Times New Roman", serif !important; font-weight: 400 !important; font-size: clamp(calc(var(--hs, 84) * 0.524px), calc(var(--hs, 84) * 0.0833vw), calc(var(--hs, 84) * 1px)) !important; line-height: 0.95 !important; letter-spacing: -0.01em; margin: 0 0 2rem; text-wrap: balance; }
   .dpx__title em { font-style: italic; }
   .dpx__text { font-size: 1.8rem; margin: 0 0 3.2rem; }
   .dpx__btn { display: inline-flex; align-items: center; justify-content: center; min-height: 5.6rem; padding: 0 3.6rem; border-radius: 999px; background: var(--s-btn, #1C1517); color: var(--s-btn-text, #FFF6F1); font: 600 1.5rem/1 "Figtree", system-ui, sans-serif; letter-spacing: 0.03em; text-decoration: none; transition: background-color 180ms ease, transform 180ms ease; }
@@ -13,7 +13,7 @@
   @media (prefers-reduced-motion: reduce) { .dpx__btn { transition: none; } .dpx__btn:hover { transform: none; } }
 {%- endstyle -%}
 
-<section class="dpx" style="--s-bg: {{ section.settings.s_bg }}; --s-fg: {{ section.settings.s_fg }}; --s-pt: {{ section.settings.s_pt }}px; --s-pb: {{ section.settings.s_pb }}px; --s-btn: {{ section.settings.s_btn }}; --s-btn-text: {{ section.settings.s_btn_text }};" aria-labelledby="dpx-title-{{ section.id }}">
+<section class="dpx" style="--s-bg: {{ section.settings.s_bg }}; --s-fg: {{ section.settings.s_fg }}; --s-pt: {{ section.settings.s_pt }}px; --s-pb: {{ section.settings.s_pb }}px; --hs: {{ section.settings.heading_size }}; --ha: {{ section.settings.heading_align }}; --s-btn: {{ section.settings.s_btn }}; --s-btn-text: {{ section.settings.s_btn_text }};" aria-labelledby="dpx-title-{{ section.id }}">
   <span class="dpx__dot dpx__dot--a" aria-hidden="true"></span>
   <span class="dpx__dot dpx__dot--b" aria-hidden="true"></span>
   <div class="dpx__inner page-width">
@@ -55,6 +55,36 @@
     {
       "type": "header",
       "content": "Section style"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size (desktop)",
+      "min": 28,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
     },
     {
       "type": "color",

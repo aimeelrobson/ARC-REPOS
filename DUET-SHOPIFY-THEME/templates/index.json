@@ -13,8 +13,33 @@
         "button_label": "Shop the kit",
         "button_link": "shopify://collections/duet-kits",
         "float_text": "loud & clear ✶",
-        "ticker": "No app | No pairing | Two mics, one receiver | Free NZ shipping | 14-day returns | Kits from $69 NZD"
-      }
+        "ticker": "No app | No pairing | Two mics, one receiver | Free NZ shipping | 14-day returns | Kits from $69 NZD",
+        "height": 85
+      },
+      "blocks": {
+        "hero_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Room for <em>two</em> voices.",
+            "size": 136,
+            "size_mobile": 72,
+            "space_below": 28
+          }
+        },
+        "hero_button": {
+          "type": "button",
+          "settings": {
+            "label": "Shop the kit",
+            "link": "shopify://collections/duet-kits",
+            "style": "dark",
+            "size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "hero_heading",
+        "hero_button"
+      ]
     },
     "marquee_YryCpt": {
       "type": "Marquee",

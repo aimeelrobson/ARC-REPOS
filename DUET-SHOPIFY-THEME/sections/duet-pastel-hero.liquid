@@ -1,15 +1,30 @@
 {%- style -%}
   .dph { position: relative; background: var(--s-bg, #CDEBDD); color: var(--s-fg, #1C1517); overflow: hidden; }
-  .dph__stage { position: relative; min-height: min(86vh, 78rem); display: flex; align-items: center; }
+  .dph__stage { position: relative; min-height: var(--hh, 80vh); display: flex; align-items: var(--v, center); }
   .dph__img { position: absolute; inset: 0; }
-  .dph__img img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 40%; display: block; }
+  .dph__img img { width: 100%; height: 100%; object-fit: cover; object-position: var(--fx, 70%) var(--fy, 40%); display: block; }
+  .dph__img::after { content: ""; position: absolute; inset: 0; background: rgba(28, 21, 23, var(--ov, 0)); pointer-events: none; }
   .dph__img--mobile { display: none; }
-  .dph__copy { position: relative; z-index: 2; max-width: 56rem; padding-block: 8rem; }
-  .dph__title { font-family: "Instrument Serif", Georgia, "Times New Roman", serif !important; font-weight: 400 !important; font-size: clamp(6rem, 9.5vw, 13.6rem) !important; line-height: 0.88 !important; letter-spacing: -0.02em; margin: 0 0 2.8rem; text-wrap: balance; }
+  .dph__wrap { position: relative; z-index: 2; width: 100%; display: flex; justify-content: var(--h, flex-start); padding-block: var(--pad, 80px); }
+  .dph__copy { width: 100%; max-width: var(--cw, 56rem); display: flex; flex-wrap: wrap; align-items: center; column-gap: 1.2rem; justify-content: var(--jc, flex-start); text-align: var(--ta, left); }
+  .dph__copy > .dph__title, .dph__copy > .dph__text { flex: 0 0 100%; }
+  .dph__title { font-family: "Instrument Serif", Georgia, "Times New Roman", serif !important; font-weight: 400 !important; font-size: clamp(calc(var(--hs, 136) * 0.44px), calc(var(--hs, 136) * 0.07vw), calc(var(--hs, 136) * 1px)) !important; line-height: 0.88 !important; letter-spacing: -0.02em; margin: 0 0 var(--mb, 28px); text-wrap: balance; color: var(--bc, inherit); }
   .dph__title em { font-style: italic; }
-  .dph__btn { display: inline-flex; align-items: center; justify-content: center; min-height: 5.6rem; padding: 0 3.6rem; border-radius: 999px; background: var(--duet-ink, #1C1517); color: var(--duet-cream, #FFF6F1); font: 600 1.5rem/1 "Figtree", system-ui, sans-serif; letter-spacing: 0.03em; text-decoration: none; transition: background-color 180ms ease, transform 180ms ease; }
-  .dph__btn:hover { background: var(--duet-hotpink, #FF7EB3); color: var(--duet-ink, #1C1517); transform: translateY(-2px); }
-  .dph__float { position: absolute; z-index: 3; right: 6%; top: 14%; font: 600 1.5rem/1 "Figtree", system-ui, sans-serif; padding: 1.3rem 2.2rem; border-radius: 999px; background: var(--s-pill, #F7C6D6); color: var(--duet-ink, #1C1517); box-shadow: 0 14px 30px -10px rgba(28, 21, 23, 0.35); animation: dph-float 4.5s ease-in-out infinite; white-space: nowrap; }
+  .dph__text { font-size: calc(var(--ts, 18) * 1px); line-height: 1.45; margin: 0 0 var(--mb, 24px); color: var(--bc, inherit); }
+  .dph__text p { margin: 0; }
+  .dph__btn { display: inline-flex; align-items: center; justify-content: center; min-height: 5.6rem; padding: 0 3.6rem; border-radius: 999px; border: 2px solid transparent; background: var(--duet-ink, #1C1517); color: var(--duet-cream, #FFF6F1); font: 600 1.5rem/1 "Figtree", system-ui, sans-serif; letter-spacing: 0.03em; text-decoration: none; margin-bottom: 1.2rem; transition: background-color 180ms ease, color 180ms ease, transform 180ms ease; }
+  .dph__btn--large { min-height: 6.4rem; padding: 0 4.4rem; font-size: 1.7rem; }
+  .dph__btn--small { min-height: 4.6rem; padding: 0 2.6rem; font-size: 1.4rem; }
+  .dph__btn--pink { background: var(--duet-hotpink, #FF7EB3); color: var(--duet-ink, #1C1517); }
+  .dph__btn--white { background: #fff; color: var(--duet-ink, #1C1517); }
+  .dph__btn--outline { background: transparent; color: currentColor; border-color: currentColor; }
+  .dph__btn:hover { background: var(--duet-hotpink, #FF7EB3); color: var(--duet-ink, #1C1517); border-color: transparent; transform: translateY(-2px); }
+  .dph__btn--pink:hover { background: var(--duet-ink, #1C1517); color: var(--duet-cream, #FFF6F1); }
+  .dph__float { position: absolute; z-index: 3; font: 600 1.5rem/1 "Figtree", system-ui, sans-serif; padding: 1.3rem 2.2rem; border-radius: 999px; background: var(--s-pill, #F7C6D6); color: var(--duet-ink, #1C1517); box-shadow: 0 14px 30px -10px rgba(28, 21, 23, 0.35); animation: dph-float 4.5s ease-in-out infinite; white-space: nowrap; }
+  .dph__float--top-right { right: 6%; top: 14%; }
+  .dph__float--top-left { left: 6%; top: 14%; }
+  .dph__float--bottom-right { right: 6%; bottom: 14%; }
+  .dph__float--bottom-left { left: 6%; bottom: 14%; }
   @keyframes dph-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
   .dph__ticker { position: relative; z-index: 2; background: var(--s-tick-bg, #1C1517); color: var(--s-tick-fg, #FFF6F1); overflow: hidden; white-space: nowrap; }
@@ -21,14 +36,18 @@
 
   @media screen and (max-width: 749px) {
     .dph__stage { display: block; min-height: 0; }
-    .dph__img { position: relative; inset: auto; aspect-ratio: 4 / 5; }
+    .dph__img { position: relative; inset: auto; aspect-ratio: var(--mr, 4 / 5); }
     .dph__img--desktop { display: none; }
     .dph__img--mobile { display: block; }
-    .dph__img img { object-position: center 35%; }
-    .dph__copy { max-width: none; padding-block: 3.6rem 4.4rem; background: var(--s-mob, #F7C6D6); }
-    .dph__title { font-size: clamp(5.2rem, 15vw, 7.2rem) !important; margin-bottom: 2.4rem; }
-    .dph__btn { width: 100%; }
-    .dph__float { top: 3.2rem; right: 1.6rem; font-size: 1.3rem; padding: 1.1rem 1.8rem; }
+    .dph__img--mobile img { object-position: var(--mfx, 50%) var(--mfy, 35%); }
+    .dph__wrap { padding-block: 3.6rem 4.4rem; background: var(--s-mob, #F7C6D6); }
+    .dph__copy { max-width: none; justify-content: var(--mjc, flex-start); text-align: var(--mta, left); }
+    .dph__title { font-size: min(calc(var(--hsm, 72) * 1px), 15vw) !important; margin-bottom: min(var(--mb, 24px), 24px); }
+    .dph__text { font-size: max(15px, calc(var(--ts, 18) * 0.9px)); }
+    .dph__btn { flex: 1 1 100%; }
+    .dph__float { font-size: 1.3rem; padding: 1.1rem 1.8rem; top: 3.2rem; bottom: auto; }
+    .dph__float--top-right, .dph__float--bottom-right { right: 1.6rem; left: auto; }
+    .dph__float--top-left, .dph__float--bottom-left { left: 1.6rem; right: auto; }
   }
   @media (prefers-reduced-motion: reduce) {
     .dph__float, .dph__track { animation: none; }
@@ -37,7 +56,50 @@
   }
 {%- endstyle -%}
 
-<section class="dph" style="--s-bg: {{ section.settings.s_bg }}; --s-fg: {{ section.settings.s_fg }}; --s-pill: {{ section.settings.s_pill }}; --s-tick-bg: {{ section.settings.s_tick_bg }}; --s-tick-fg: {{ section.settings.s_tick_fg }}; --s-mob: {{ section.settings.s_mob }};" aria-labelledby="dph-title-{{ section.id }}">
+{%- liquid
+  case section.settings.h_pos
+    when 'center'
+      assign h = 'center'
+    when 'right'
+      assign h = 'flex-end'
+    else
+      assign h = 'flex-start'
+  endcase
+  case section.settings.v_pos
+    when 'top'
+      assign v = 'flex-start'
+    when 'bottom'
+      assign v = 'flex-end'
+    else
+      assign v = 'center'
+  endcase
+  case section.settings.align
+    when 'center'
+      assign jc = 'center'
+    when 'right'
+      assign jc = 'flex-end'
+    else
+      assign jc = 'flex-start'
+  endcase
+  if section.settings.mobile_align == 'center'
+    assign mjc = 'center'
+  else
+    assign mjc = 'flex-start'
+  endif
+  case section.settings.mobile_ratio
+    when 'square'
+      assign mr = '1 / 1'
+    when 'tall'
+      assign mr = '2 / 3'
+    when 'landscape'
+      assign mr = '4 / 3'
+    else
+      assign mr = '4 / 5'
+  endcase
+  assign ov = section.settings.overlay | divided_by: 100.0
+-%}
+
+<section class="dph" style="--s-bg: {{ section.settings.s_bg }}; --s-fg: {{ section.settings.s_fg }}; --s-pill: {{ section.settings.s_pill }}; --s-tick-bg: {{ section.settings.s_tick_bg }}; --s-tick-fg: {{ section.settings.s_tick_fg }}; --s-mob: {{ section.settings.s_mob }}; --hh: {{ section.settings.height }}vh; --h: {{ h }}; --v: {{ v }}; --jc: {{ jc }}; --ta: {{ section.settings.align }}; --mjc: {{ mjc }}; --mta: {{ section.settings.mobile_align }}; --cw: {{ section.settings.copy_width }}rem; --pad: {{ section.settings.edge_space }}px; --fx: {{ section.settings.focus_x }}%; --fy: {{ section.settings.focus_y }}%; --mfx: {{ section.settings.m_focus_x }}%; --mfy: {{ section.settings.m_focus_y }}%; --mr: {{ mr }}; --ov: {{ ov }};" aria-labelledby="dph-title-{{ section.id }}">
   <div class="dph__stage">
     {%- if section.settings.image != blank -%}
       <div class="dph__img dph__img--desktop">
@@ -50,12 +112,37 @@
         {{ mobile_img | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '500, 750, 1000', sizes: '100vw', alt: mobile_img.alt }}
       </div>
     {%- endif -%}
-    {%- if section.settings.float_text != blank -%}<span class="dph__float">{{ section.settings.float_text }}</span>{%- endif -%}
-    <div class="dph__copy page-width">
-      <h1 class="dph__title" id="dph-title-{{ section.id }}">{{ section.settings.heading }}</h1>
-      {%- if section.settings.button_label != blank -%}
-        <a class="dph__btn" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a>
-      {%- endif -%}
+    {%- if section.settings.float_text != blank -%}<span class="dph__float dph__float--{{ section.settings.float_pos }}">{{ section.settings.float_text }}</span>{%- endif -%}
+    <div class="dph__wrap page-width">
+      <div class="dph__copy">
+        {%- if section.blocks.size > 0 -%}
+          {%- assign used_h1 = false -%}
+          {%- for block in section.blocks -%}
+            {%- assign bc = 'inherit' -%}
+            {%- if block.settings.colour != blank and block.settings.colour != 'rgba(0,0,0,0)' -%}{%- assign bc = block.settings.colour -%}{%- endif -%}
+            {%- case block.type -%}
+              {%- when 'heading' -%}
+                {%- if used_h1 -%}
+                  <h2 class="dph__title" style="--hs: {{ block.settings.size }}; --hsm: {{ block.settings.size_mobile }}; --mb: {{ block.settings.space_below }}px; --bc: {{ bc }};" {{ block.shopify_attributes }}>{{ block.settings.heading }}</h2>
+                {%- else -%}
+                  {%- assign used_h1 = true -%}
+                  <h1 class="dph__title" id="dph-title-{{ section.id }}" style="--hs: {{ block.settings.size }}; --hsm: {{ block.settings.size_mobile }}; --mb: {{ block.settings.space_below }}px; --bc: {{ bc }};" {{ block.shopify_attributes }}>{{ block.settings.heading }}</h1>
+                {%- endif -%}
+              {%- when 'text' -%}
+                <div class="dph__text" style="--ts: {{ block.settings.size }}; --mb: {{ block.settings.space_below }}px; --bc: {{ bc }};" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+              {%- when 'button' -%}
+                {%- if block.settings.label != blank -%}
+                  <a class="dph__btn dph__btn--{{ block.settings.style }} dph__btn--{{ block.settings.size }}" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+                {%- endif -%}
+            {%- endcase -%}
+          {%- endfor -%}
+        {%- else -%}
+          <h1 class="dph__title" id="dph-title-{{ section.id }}">{{ section.settings.heading }}</h1>
+          {%- if section.settings.button_label != blank -%}
+            <a class="dph__btn" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
     </div>
   </div>
   {%- assign items = section.settings.ticker | split: '|' -%}
@@ -73,9 +160,47 @@
   "name": "DUET pastel hero",
   "settings": [
     {
+      "type": "paragraph",
+      "content": "Add, remove or drag the Heading, Text and Button blocks (left-hand list) to change what shows and in which order. Click a block to change its size and colour."
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
       "type": "image_picker",
       "id": "image",
       "label": "Image (desktop, wide)"
+    },
+    {
+      "type": "range",
+      "id": "focus_x",
+      "label": "Desktop image focus: left ↔ right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "focus_y",
+      "label": "Desktop image focus: top ↕ bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "overlay",
+      "label": "Darken image (helps text stand out)",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "%",
+      "default": 0
     },
     {
       "type": "image_picker",
@@ -83,27 +208,137 @@
       "label": "Image (mobile, portrait)"
     },
     {
-      "type": "inline_richtext",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Room for <em>two</em> voices."
+      "type": "select",
+      "id": "mobile_ratio",
+      "label": "Mobile image shape",
+      "options": [
+        { "value": "portrait", "label": "Portrait (4:5)" },
+        { "value": "tall", "label": "Tall (2:3)" },
+        { "value": "square", "label": "Square" },
+        { "value": "landscape", "label": "Landscape (4:3)" }
+      ],
+      "default": "portrait"
     },
     {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label",
-      "default": "Shop the kit"
+      "type": "range",
+      "id": "m_focus_x",
+      "label": "Mobile image focus: left ↔ right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
     },
     {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
+      "type": "range",
+      "id": "m_focus_y",
+      "label": "Mobile image focus: top ↕ bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 35
+    },
+    {
+      "type": "header",
+      "content": "Size & text position"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Section height (desktop)",
+      "info": "100 = full screen",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 80
+    },
+    {
+      "type": "select",
+      "id": "h_pos",
+      "label": "Text position: left / centre / right",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "v_pos",
+      "label": "Text position: top / middle / bottom",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "middle", "label": "Middle" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "middle"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "copy_width",
+      "label": "Text box width",
+      "min": 30,
+      "max": 100,
+      "step": 2,
+      "unit": "rem",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "edge_space",
+      "label": "Space between text and top/bottom edge",
+      "min": 16,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "select",
+      "id": "mobile_align",
+      "label": "Mobile text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Floating pill & ticker"
     },
     {
       "type": "text",
       "id": "float_text",
       "label": "Floating pill",
+      "info": "Leave empty to hide",
       "default": "loud & clear ✶"
+    },
+    {
+      "type": "select",
+      "id": "float_pos",
+      "label": "Floating pill position",
+      "options": [
+        { "value": "top-right", "label": "Top right" },
+        { "value": "top-left", "label": "Top left" },
+        { "value": "bottom-right", "label": "Bottom right" },
+        { "value": "bottom-left", "label": "Bottom left" }
+      ],
+      "default": "top-right"
     },
     {
       "type": "text",
@@ -151,11 +386,166 @@
       "id": "s_mob",
       "label": "Mobile headline panel",
       "default": "#F7C6D6"
+    },
+    {
+      "type": "header",
+      "content": "Fallback (only used if all blocks are removed)"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Room for <em>two</em> voices."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop the kit"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
     }
   ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "info": "Select a word and press I for italic",
+          "default": "Room for <em>two</em> voices."
+        },
+        {
+          "type": "range",
+          "id": "size",
+          "label": "Size (desktop)",
+          "min": 40,
+          "max": 220,
+          "step": 4,
+          "unit": "px",
+          "default": 136
+        },
+        {
+          "type": "range",
+          "id": "size_mobile",
+          "label": "Size (mobile)",
+          "min": 32,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 72
+        },
+        {
+          "type": "range",
+          "id": "space_below",
+          "label": "Space below",
+          "min": 0,
+          "max": 80,
+          "step": 4,
+          "unit": "px",
+          "default": 28
+        },
+        {
+          "type": "color",
+          "id": "colour",
+          "label": "Colour",
+          "info": "Leave blank to use the section text colour"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Two tiny wireless mics. One receiver. Zero fuss."
+        },
+        {
+          "type": "range",
+          "id": "size",
+          "label": "Size",
+          "min": 14,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "space_below",
+          "label": "Space below",
+          "min": 0,
+          "max": 80,
+          "step": 4,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "color",
+          "id": "colour",
+          "label": "Colour",
+          "info": "Leave blank to use the section text colour"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Button label",
+          "default": "Shop the kit"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "dark", "label": "Dark" },
+            { "value": "pink", "label": "Hot pink" },
+            { "value": "white", "label": "White" },
+            { "value": "outline", "label": "Outline" }
+          ],
+          "default": "dark"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Size",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ],
+          "default": "medium"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
   "presets": [
     {
-      "name": "DUET pastel hero"
+      "name": "DUET pastel hero",
+      "blocks": [
+        { "type": "heading" },
+        { "type": "button" }
+      ]
     }
   ]
 }
