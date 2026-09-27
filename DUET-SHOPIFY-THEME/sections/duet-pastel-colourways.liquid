@@ -1,5 +1,5 @@
 {%- style -%}
-  .dpc { background: #fff; padding-block: 7.2rem; }
+  .dpc { background: var(--s-bg, #fff); color: var(--s-fg, #1C1517); padding-block: var(--s-pt, 72px) var(--s-pb, 72px); }
   .dpc__head { text-align: center; max-width: 64rem; margin: 0 auto 4rem; }
   .dpc__head h2 { font-size: clamp(4rem, 6vw, 6.8rem) !important; line-height: 1 !important; margin: 0 0 1.2rem; }
   .dpc__head h2 em { font-style: italic; }
@@ -19,14 +19,14 @@
     .dpc__tile { scroll-snap-align: start; }
   }
   @media screen and (max-width: 480px) {
-    .dpc { padding-block: 5.6rem; }
+    .dpc { padding-block: calc(var(--s-pt) * 0.75) calc(var(--s-pb) * 0.75); }
     .dpc__grid { grid-template-columns: repeat(3, 80%); gap: 1.6rem; }
     .dpc__name { font-size: 3.6rem; }
   }
   @media (prefers-reduced-motion: reduce) { .dpc__tile, .dpc__media img { transition: none; } .dpc__tile:hover { transform: none; } .dpc__tile:hover .dpc__media img { transform: none; } }
 {%- endstyle -%}
 
-<section class="dpc" aria-labelledby="dpc-title-{{ section.id }}">
+<section class="dpc" style="--s-bg: {{ section.settings.s_bg }}; --s-fg: {{ section.settings.s_fg }}; --s-pt: {{ section.settings.s_pt }}px; --s-pb: {{ section.settings.s_pb }}px;" aria-labelledby="dpc-title-{{ section.id }}">
   <div class="page-width">
     <div class="dpc__head">
       <h2 id="dpc-title-{{ section.id }}">{{ section.settings.heading }}</h2>
@@ -57,24 +57,102 @@
 {
   "name": "DUET colourways",
   "settings": [
-    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Blush, Cloud or <em>Noir?</em>" },
-    { "type": "text", "id": "text", "label": "Text", "default": "Three colours. The same tiny mics. Which one's you?" }
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Blush, Cloud or <em>Noir?</em>"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Three colours. The same tiny mics. Which one's you?"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "color",
+      "id": "s_bg",
+      "label": "Background colour",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "s_fg",
+      "label": "Text colour",
+      "default": "#1C1517"
+    },
+    {
+      "type": "range",
+      "id": "s_pt",
+      "label": "Space above",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "s_pb",
+      "label": "Space below",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 72
+    }
   ],
   "blocks": [
     {
       "type": "colour",
       "name": "Colourway",
       "settings": [
-        { "type": "text", "id": "name", "label": "Name", "default": "Blush" },
-        { "type": "text", "id": "sub", "label": "Label", "default": "Pink" },
-        { "type": "text", "id": "cta", "label": "Button text", "default": "Shop" },
-        { "type": "url", "id": "link", "label": "Link" },
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "color", "id": "bg", "label": "Tile colour", "default": "#F7C6D6" }
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Blush"
+        },
+        {
+          "type": "text",
+          "id": "sub",
+          "label": "Label",
+          "default": "Pink"
+        },
+        {
+          "type": "text",
+          "id": "cta",
+          "label": "Button text",
+          "default": "Shop"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "color",
+          "id": "bg",
+          "label": "Tile colour",
+          "default": "#F7C6D6"
+        }
       ]
     }
   ],
   "max_blocks": 6,
-  "presets": [{ "name": "DUET colourways" }]
+  "presets": [
+    {
+      "name": "DUET colourways"
+    }
+  ]
 }
 {% endschema %}

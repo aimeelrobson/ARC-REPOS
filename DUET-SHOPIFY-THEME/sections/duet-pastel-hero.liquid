@@ -1,5 +1,5 @@
 {%- style -%}
-  .dph { position: relative; background: var(--duet-mint, #CDEBDD); color: var(--duet-ink, #1C1517); overflow: hidden; }
+  .dph { position: relative; background: var(--s-bg, #CDEBDD); color: var(--s-fg, #1C1517); overflow: hidden; }
   .dph__stage { position: relative; min-height: min(86vh, 78rem); display: flex; align-items: center; }
   .dph__img { position: absolute; inset: 0; }
   .dph__img img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 40%; display: block; }
@@ -9,10 +9,10 @@
   .dph__title em { font-style: italic; }
   .dph__btn { display: inline-flex; align-items: center; justify-content: center; min-height: 5.6rem; padding: 0 3.6rem; border-radius: 999px; background: var(--duet-ink, #1C1517); color: var(--duet-cream, #FFF6F1); font: 600 1.5rem/1 "Figtree", system-ui, sans-serif; letter-spacing: 0.03em; text-decoration: none; transition: background-color 180ms ease, transform 180ms ease; }
   .dph__btn:hover { background: var(--duet-hotpink, #FF7EB3); color: var(--duet-ink, #1C1517); transform: translateY(-2px); }
-  .dph__float { position: absolute; z-index: 3; right: 6%; top: 14%; font: 600 1.5rem/1 "Figtree", system-ui, sans-serif; padding: 1.3rem 2.2rem; border-radius: 999px; background: var(--duet-bubblegum, #F7C6D6); color: var(--duet-ink, #1C1517); box-shadow: 0 14px 30px -10px rgba(28, 21, 23, 0.35); animation: dph-float 4.5s ease-in-out infinite; white-space: nowrap; }
+  .dph__float { position: absolute; z-index: 3; right: 6%; top: 14%; font: 600 1.5rem/1 "Figtree", system-ui, sans-serif; padding: 1.3rem 2.2rem; border-radius: 999px; background: var(--s-pill, #F7C6D6); color: var(--duet-ink, #1C1517); box-shadow: 0 14px 30px -10px rgba(28, 21, 23, 0.35); animation: dph-float 4.5s ease-in-out infinite; white-space: nowrap; }
   @keyframes dph-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-  .dph__ticker { position: relative; z-index: 2; background: var(--duet-ink, #1C1517); color: var(--duet-cream, #FFF6F1); overflow: hidden; white-space: nowrap; }
+  .dph__ticker { position: relative; z-index: 2; background: var(--s-tick-bg, #1C1517); color: var(--s-tick-fg, #FFF6F1); overflow: hidden; white-space: nowrap; }
   .dph__track { display: inline-flex; gap: 0; padding-block: 1.6rem; animation: dph-scroll 32s linear infinite; }
   .dph__track span { font: 600 1.4rem/1 "Figtree", system-ui, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; padding-inline: 2.4rem; display: inline-flex; align-items: center; gap: 2.4rem; }
   .dph__track span::after { content: "✶"; color: var(--duet-bubblegum, #F7C6D6); }
@@ -25,7 +25,7 @@
     .dph__img--desktop { display: none; }
     .dph__img--mobile { display: block; }
     .dph__img img { object-position: center 35%; }
-    .dph__copy { max-width: none; padding-block: 3.6rem 4.4rem; background: var(--duet-bubblegum, #F7C6D6); }
+    .dph__copy { max-width: none; padding-block: 3.6rem 4.4rem; background: var(--s-mob, #F7C6D6); }
     .dph__title { font-size: clamp(5.2rem, 15vw, 7.2rem) !important; margin-bottom: 2.4rem; }
     .dph__btn { width: 100%; }
     .dph__float { top: 3.2rem; right: 1.6rem; font-size: 1.3rem; padding: 1.1rem 1.8rem; }
@@ -37,7 +37,7 @@
   }
 {%- endstyle -%}
 
-<section class="dph" aria-labelledby="dph-title-{{ section.id }}">
+<section class="dph" style="--s-bg: {{ section.settings.s_bg }}; --s-fg: {{ section.settings.s_fg }}; --s-pill: {{ section.settings.s_pill }}; --s-tick-bg: {{ section.settings.s_tick_bg }}; --s-tick-fg: {{ section.settings.s_tick_fg }}; --s-mob: {{ section.settings.s_mob }};" aria-labelledby="dph-title-{{ section.id }}">
   <div class="dph__stage">
     {%- if section.settings.image != blank -%}
       <div class="dph__img dph__img--desktop">
@@ -72,14 +72,91 @@
 {
   "name": "DUET pastel hero",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Image (desktop, wide)" },
-    { "type": "image_picker", "id": "image_mobile", "label": "Image (mobile, portrait)" },
-    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Room for <em>two</em> voices." },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the kit" },
-    { "type": "url", "id": "button_link", "label": "Button link" },
-    { "type": "text", "id": "float_text", "label": "Floating pill", "default": "loud & clear ✶" },
-    { "type": "text", "id": "ticker", "label": "Scrolling ticker", "info": "Separate each item with |", "default": "No app | No pairing | Two mics, one receiver | Free NZ shipping | 14-day returns | Kits from $69 NZD" }
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image (desktop, wide)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image (mobile, portrait)"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Room for <em>two</em> voices."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop the kit"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "float_text",
+      "label": "Floating pill",
+      "default": "loud & clear ✶"
+    },
+    {
+      "type": "text",
+      "id": "ticker",
+      "label": "Scrolling ticker",
+      "info": "Separate each item with |",
+      "default": "No app | No pairing | Two mics, one receiver | Free NZ shipping | 14-day returns | Kits from $69 NZD"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "color",
+      "id": "s_bg",
+      "label": "Background colour",
+      "default": "#CDEBDD"
+    },
+    {
+      "type": "color",
+      "id": "s_fg",
+      "label": "Text colour",
+      "default": "#1C1517"
+    },
+    {
+      "type": "color",
+      "id": "s_pill",
+      "label": "Floating pill colour",
+      "default": "#F7C6D6"
+    },
+    {
+      "type": "color",
+      "id": "s_tick_bg",
+      "label": "Ticker background",
+      "default": "#1C1517"
+    },
+    {
+      "type": "color",
+      "id": "s_tick_fg",
+      "label": "Ticker text",
+      "default": "#FFF6F1"
+    },
+    {
+      "type": "color",
+      "id": "s_mob",
+      "label": "Mobile headline panel",
+      "default": "#F7C6D6"
+    }
   ],
-  "presets": [{ "name": "DUET pastel hero" }]
+  "presets": [
+    {
+      "name": "DUET pastel hero"
+    }
+  ]
 }
 {% endschema %}

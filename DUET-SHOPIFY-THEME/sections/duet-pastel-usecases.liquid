@@ -1,5 +1,5 @@
 {%- style -%}
-  .dpu { background: var(--duet-peach, #FDD3B8); padding-block: 7.2rem; }
+  .dpu { background: var(--s-bg, #FDD3B8); color: var(--s-fg, #1C1517); padding-block: var(--s-pt, 72px) var(--s-pb, 72px); }
   .dpu__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 2.4rem; flex-wrap: wrap; margin-bottom: 3.6rem; }
   .dpu__head h2 { font-size: clamp(4rem, 6vw, 6.8rem) !important; line-height: 1 !important; margin: 0; max-width: 18ch; }
   .dpu__head h2 em { font-style: italic; }
@@ -15,14 +15,14 @@
     .dpu__card { scroll-snap-align: start; }
   }
   @media screen and (max-width: 480px) {
-    .dpu { padding-block: 5.6rem; }
+    .dpu { padding-block: calc(var(--s-pt) * 0.75) calc(var(--s-pb) * 0.75); }
     .dpu__grid { grid-template-columns: repeat(4, 72%); gap: 1.4rem; }
     .dpu__sticker { font-size: 2.2rem; }
   }
   @media (prefers-reduced-motion: reduce) { .dpu__media img { transition: none; } .dpu__card:hover .dpu__media img { transform: none; } }
 {%- endstyle -%}
 
-<section class="dpu" aria-labelledby="dpu-title-{{ section.id }}">
+<section class="dpu" style="--s-bg: {{ section.settings.s_bg }}; --s-fg: {{ section.settings.s_fg }}; --s-pt: {{ section.settings.s_pt }}px; --s-pb: {{ section.settings.s_pb }}px;" aria-labelledby="dpu-title-{{ section.id }}">
   <div class="page-width">
     <div class="dpu__head">
       <h2 id="dpu-title-{{ section.id }}">{{ section.settings.heading }}</h2>
@@ -47,22 +47,90 @@
 {
   "name": "DUET use cases",
   "settings": [
-    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Made for the way <em>you</em> film" },
-    { "type": "text", "id": "text", "label": "Text", "default": "If there are two of you talking, there should be two mics." }
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Made for the way <em>you</em> film"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "If there are two of you talking, there should be two mics."
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "color",
+      "id": "s_bg",
+      "label": "Background colour",
+      "default": "#FDD3B8"
+    },
+    {
+      "type": "color",
+      "id": "s_fg",
+      "label": "Text colour",
+      "default": "#1C1517"
+    },
+    {
+      "type": "range",
+      "id": "s_pt",
+      "label": "Space above",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "s_pb",
+      "label": "Space below",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 72
+    }
   ],
   "blocks": [
     {
       "type": "card",
       "name": "Use case",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "label", "label": "Sticker text", "default": "podcasts." },
-        { "type": "color", "id": "sticker_bg", "label": "Sticker colour", "default": "#F7C6D6" },
-        { "type": "url", "id": "link", "label": "Link" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Sticker text",
+          "default": "podcasts."
+        },
+        {
+          "type": "color",
+          "id": "sticker_bg",
+          "label": "Sticker colour",
+          "default": "#F7C6D6"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
       ]
     }
   ],
   "max_blocks": 8,
-  "presets": [{ "name": "DUET use cases" }]
+  "presets": [
+    {
+      "name": "DUET use cases"
+    }
+  ]
 }
 {% endschema %}

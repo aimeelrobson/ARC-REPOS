@@ -3,7 +3,7 @@
      cream use cases, white steps, ink trust, lilac story, cream gallery, butter FAQ, bubblegum close */
 
   /* Kits: mint field, white rounded cards */
-  main [id*="__featured_collection"] > .gradient { background: var(--duet-mint, #CDEBDD); }
+  main [id*="__featured_collection"] > .gradient { background: {{ section.settings.kits_bg }}; }
   .collection__title { text-align: center; }
   .collection__title .title, .collection__title .collection__description { margin-left: auto; margin-right: auto; }
   .collection__title .title { font-size: clamp(4rem, 6vw, 6.8rem); line-height: 1; }
@@ -55,7 +55,7 @@
 
   /* Story: lilac field, arched image */
   main [id*="__image_with_text"] > .gradient,
-  main [id*="__image_with_text"] .image-with-text__content { background: var(--duet-lilac, #D9CCF5); }
+  main [id*="__image_with_text"] .image-with-text__content { background: {{ section.settings.story_bg }}; }
   main [id*="__image_with_text"] .image-with-text__media { border-radius: 999px 999px 32px 32px !important; overflow: hidden; }
   main [id*="__image_with_text"] .image-with-text__heading { font-size: clamp(4rem, 5.5vw, 6rem); line-height: 1; }
   @media screen and (min-width: 990px) {
@@ -64,7 +64,7 @@
   }
 
   /* Gallery: cream, rounded tiles */
-  main [id*="__image_gallery"] { background: #fff; padding-top: 6.4rem; padding-bottom: 6.4rem; }
+  main [id*="__image_gallery"] { background: {{ section.settings.gallery_bg }}; padding-top: 6.4rem; padding-bottom: 6.4rem; }
   main [id*="__image_gallery"] > .page-width { text-align: center; padding-bottom: 2.4rem; }
   main [id*="__image_gallery"] h1, main [id*="__image_gallery"] h2 { font-size: clamp(4rem, 6vw, 6.8rem); line-height: 1; }
   main [id*="__image_gallery"] img { border-radius: 24px; }
@@ -72,7 +72,7 @@
 
   /* FAQ: butter field, white rows */
   main [id*="__collapsible_content"] > .gradient,
-  main [id*="__collapsible_content"] .collapsible-content { background: var(--duet-butter, #FCE7A0); }
+  main [id*="__collapsible_content"] .collapsible-content { background: {{ section.settings.faq_bg }}; }
   main [id*="__collapsible_content"] .collapsible-content__heading { font-size: clamp(4rem, 6vw, 6.8rem); line-height: 1; }
   main [id*="__collapsible_content"] .collapsible-content__grid,
   main [id*="__collapsible_content"] .collapsible-content-wrapper-narrow { background: transparent !important; }
@@ -92,6 +92,35 @@
 {% schema %}
 {
   "name": "DUET tweaks",
-  "settings": []
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Background colours for the standard Shopify sections on the homepage. Each one only changes its own section."
+    },
+    {
+      "type": "color",
+      "id": "kits_bg",
+      "label": "Choose your kit: background",
+      "default": "#CDEBDD"
+    },
+    {
+      "type": "color",
+      "id": "story_bg",
+      "label": "Built for two voices: background",
+      "default": "#D9CCF5"
+    },
+    {
+      "type": "color",
+      "id": "gallery_bg",
+      "label": "Made to move with you: background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "faq_bg",
+      "label": "The practical stuff: background",
+      "default": "#FCE7A0"
+    }
+  ]
 }
 {% endschema %}

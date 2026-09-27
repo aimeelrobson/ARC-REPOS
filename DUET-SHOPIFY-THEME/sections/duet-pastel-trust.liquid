@@ -1,15 +1,15 @@
 {%- style -%}
-  .dpt { background: var(--duet-ink, #1C1517); color: var(--duet-cream, #FFF6F1); padding-block: 7.2rem; }
-  .dpt__title { font-family: "Instrument Serif", Georgia, "Times New Roman", serif !important; font-weight: 400 !important; font-size: clamp(3.6rem, 5vw, 5.6rem) !important; line-height: 1 !important; color: var(--duet-cream, #FFF6F1); margin: 0 0 3.6rem; text-wrap: balance; }
+  .dpt { background: var(--s-bg, #1C1517); color: var(--s-fg, #FFF6F1); padding-block: var(--s-pt, 72px) var(--s-pb, 72px); }
+  .dpt__title { font-family: "Instrument Serif", Georgia, "Times New Roman", serif !important; font-weight: 400 !important; font-size: clamp(3.6rem, 5vw, 5.6rem) !important; line-height: 1 !important; color: var(--s-fg, #FFF6F1); margin: 0 0 3.6rem; text-wrap: balance; }
   .dpt__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6rem; }
   .dpt__card { border-radius: 24px; padding: 2.8rem 2.4rem; color: var(--duet-ink, #1C1517); display: grid; gap: 0.8rem; align-content: start; }
   .dpt__card h3 { font-family: "Instrument Serif", Georgia, "Times New Roman", serif !important; font-weight: 400 !important; font-size: 2.8rem !important; line-height: 1.05 !important; margin: 0; color: var(--duet-ink, #1C1517); }
   .dpt__card p { margin: 0; font-size: 1.5rem; line-height: 1.4; color: var(--duet-ink, #1C1517); }
   @media screen and (max-width: 989px) { .dpt__grid { grid-template-columns: repeat(2, 1fr); } }
-  @media screen and (max-width: 480px) { .dpt { padding-block: 5.6rem; } .dpt__card { padding: 2rem 1.6rem; } .dpt__card h3 { font-size: 2.2rem !important; } }
+  @media screen and (max-width: 480px) { .dpt { padding-block: calc(var(--s-pt) * 0.75) calc(var(--s-pb) * 0.75); } .dpt__card { padding: 2rem 1.6rem; } .dpt__card h3 { font-size: 2.2rem !important; } }
 {%- endstyle -%}
 
-<section class="dpt" aria-labelledby="dpt-title-{{ section.id }}">
+<section class="dpt" style="--s-bg: {{ section.settings.s_bg }}; --s-fg: {{ section.settings.s_fg }}; --s-pt: {{ section.settings.s_pt }}px; --s-pb: {{ section.settings.s_pb }}px;" aria-labelledby="dpt-title-{{ section.id }}">
   <div class="page-width">
     <h2 class="dpt__title" id="dpt-title-{{ section.id }}">{{ section.settings.heading }}</h2>
     <ul class="dpt__grid">
@@ -27,20 +27,80 @@
 {
   "name": "DUET trust bar",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Everything you need. Nothing you don’t." }
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Everything you need. Nothing you don’t."
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "color",
+      "id": "s_bg",
+      "label": "Background colour",
+      "default": "#1C1517"
+    },
+    {
+      "type": "color",
+      "id": "s_fg",
+      "label": "Text colour",
+      "default": "#FFF6F1"
+    },
+    {
+      "type": "range",
+      "id": "s_pt",
+      "label": "Space above",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "s_pb",
+      "label": "Space below",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 72
+    }
   ],
   "blocks": [
     {
       "type": "promise",
       "name": "Promise",
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Free NZ shipping" },
-        { "type": "text", "id": "text", "label": "Text", "default": "On every order" },
-        { "type": "color", "id": "bg", "label": "Card colour", "default": "#F7C6D6" }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free NZ shipping"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "On every order"
+        },
+        {
+          "type": "color",
+          "id": "bg",
+          "label": "Card colour",
+          "default": "#F7C6D6"
+        }
       ]
     }
   ],
   "max_blocks": 4,
-  "presets": [{ "name": "DUET trust bar" }]
+  "presets": [
+    {
+      "name": "DUET trust bar"
+    }
+  ]
 }
 {% endschema %}

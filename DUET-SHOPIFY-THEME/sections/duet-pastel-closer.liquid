@@ -1,19 +1,19 @@
 {%- style -%}
-  .dpx { background: var(--duet-bubblegum, #F7C6D6); color: var(--duet-ink, #1C1517); padding-block: 9.6rem; text-align: center; position: relative; overflow: hidden; }
+  .dpx { background: var(--s-bg, #F7C6D6); color: var(--s-fg, #1C1517); padding-block: var(--s-pt, 96px) var(--s-pb, 96px); text-align: center; position: relative; overflow: hidden; }
   .dpx__inner { position: relative; z-index: 1; max-width: 88rem; margin: 0 auto; }
   .dpx__title { font-family: "Instrument Serif", Georgia, "Times New Roman", serif !important; font-weight: 400 !important; font-size: clamp(4.4rem, 7vw, 8.4rem) !important; line-height: 0.95 !important; letter-spacing: -0.01em; margin: 0 0 2rem; text-wrap: balance; }
   .dpx__title em { font-style: italic; }
   .dpx__text { font-size: 1.8rem; margin: 0 0 3.2rem; }
-  .dpx__btn { display: inline-flex; align-items: center; justify-content: center; min-height: 5.6rem; padding: 0 3.6rem; border-radius: 999px; background: var(--duet-ink, #1C1517); color: var(--duet-cream, #FFF6F1); font: 600 1.5rem/1 "Figtree", system-ui, sans-serif; letter-spacing: 0.03em; text-decoration: none; transition: background-color 180ms ease, transform 180ms ease; }
+  .dpx__btn { display: inline-flex; align-items: center; justify-content: center; min-height: 5.6rem; padding: 0 3.6rem; border-radius: 999px; background: var(--s-btn, #1C1517); color: var(--s-btn-text, #FFF6F1); font: 600 1.5rem/1 "Figtree", system-ui, sans-serif; letter-spacing: 0.03em; text-decoration: none; transition: background-color 180ms ease, transform 180ms ease; }
   .dpx__btn:hover { background: #fff; color: var(--duet-ink, #1C1517); transform: translateY(-1px); }
   .dpx__dot { position: absolute; border-radius: 50%; z-index: 0; }
   .dpx__dot--a { width: 22rem; height: 22rem; background: var(--duet-butter, #FCE7A0); left: -6rem; top: -6rem; }
   .dpx__dot--b { width: 16rem; height: 16rem; background: var(--duet-lilac, #D9CCF5); right: -4rem; bottom: -5rem; }
-  @media screen and (max-width: 749px) { .dpx { padding-block: 7.2rem; } .dpx__dot--a { width: 14rem; height: 14rem; } .dpx__dot--b { width: 10rem; height: 10rem; } }
+  @media screen and (max-width: 749px) { .dpx { padding-block: calc(var(--s-pt) * 0.75) calc(var(--s-pb) * 0.75); } .dpx__dot--a { width: 14rem; height: 14rem; } .dpx__dot--b { width: 10rem; height: 10rem; } }
   @media (prefers-reduced-motion: reduce) { .dpx__btn { transition: none; } .dpx__btn:hover { transform: none; } }
 {%- endstyle -%}
 
-<section class="dpx" aria-labelledby="dpx-title-{{ section.id }}">
+<section class="dpx" style="--s-bg: {{ section.settings.s_bg }}; --s-fg: {{ section.settings.s_fg }}; --s-pt: {{ section.settings.s_pt }}px; --s-pb: {{ section.settings.s_pb }}px; --s-btn: {{ section.settings.s_btn }}; --s-btn-text: {{ section.settings.s_btn_text }};" aria-labelledby="dpx-title-{{ section.id }}">
   <span class="dpx__dot dpx__dot--a" aria-hidden="true"></span>
   <span class="dpx__dot dpx__dot--b" aria-hidden="true"></span>
   <div class="dpx__inner page-width">
@@ -29,11 +29,82 @@
 {
   "name": "DUET closing message",
   "settings": [
-    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Ready for <em>both</em> sides of the conversation?" },
-    { "type": "text", "id": "text", "label": "Text", "default": "Choose the DUET setup that fits the way you create." },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the kits" },
-    { "type": "url", "id": "button_link", "label": "Button link" }
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Ready for <em>both</em> sides of the conversation?"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Choose the DUET setup that fits the way you create."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop the kits"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "color",
+      "id": "s_bg",
+      "label": "Background colour",
+      "default": "#F7C6D6"
+    },
+    {
+      "type": "color",
+      "id": "s_fg",
+      "label": "Text colour",
+      "default": "#1C1517"
+    },
+    {
+      "type": "color",
+      "id": "s_btn",
+      "label": "Button colour",
+      "default": "#1C1517"
+    },
+    {
+      "type": "color",
+      "id": "s_btn_text",
+      "label": "Button text colour",
+      "default": "#FFF6F1"
+    },
+    {
+      "type": "range",
+      "id": "s_pt",
+      "label": "Space above",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "s_pb",
+      "label": "Space below",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 96
+    }
   ],
-  "presets": [{ "name": "DUET closing message" }]
+  "presets": [
+    {
+      "name": "DUET closing message"
+    }
+  ]
 }
 {% endschema %}
