@@ -2,21 +2,25 @@
 import sys, numpy as np
 from PIL import Image, ImageFilter
 
-def grade(src, dst, grain=19.0, seed=7):
+def grade(src, dst, grain=19.0, seed=7, people=False):
     im = Image.open(src).convert('RGB')
     im = im.filter(ImageFilter.GaussianBlur(0.45))                      # soften AI crispness
     a = np.asarray(im).astype(np.float32) / 255.0
     h, w, _ = a.shape
     y, x = np.mgrid[0:h, 0:w].astype(np.float32)
     # 1. On-camera flash: centre lift + soft vignette falloff
-    cx, cy = w * 0.5, h * 0.46
+    cx, cy = w * 0.5, h * (0.40 if people else 0.46)
     r = np.sqrt(((x - cx) / (w * 0.62)) ** 2 + ((y - cy) / (h * 0.62)) ** 2)
-    flash = 1.07 - 0.30 * np.clip(r, 0, 1.4) ** 1.7
+    if people:
+        # direct on-camera flash: subject pops, light falls away fast, very slight vignette at the corners
+        flash = 1.17 - 0.33 * np.clip(r, 0, 1.4) ** 1.25 - 0.08 * np.clip(r - 0.85, 0, 1) ** 1.2
+    else:
+        flash = 1.07 - 0.30 * np.clip(r, 0, 1.4) ** 1.7
     a = a * flash[..., None]
     # 2. Tone: slightly darker mids, deeper shadows, gentle S-curve, soft highlight roll-off
     a = np.clip(a, 0, 1)
     a = a ** 1.04
-    a = a + 0.22 * (a - 0.5) * (1 - np.abs(2 * a - 1))                   # S-curve (flash punch)
+    a = a + (0.30 if people else 0.22) * (a - 0.5) * (1 - np.abs(2 * a - 1))   # S-curve (flash punch)
     a = 1 - (1 - a) ** 1.04
     # 3. Colour: calm hot reds/oranges, warm highlights, faint cool shadows
     lum = (a * [0.299, 0.587, 0.114]).sum(2, keepdims=True)
@@ -28,7 +32,7 @@ def grade(src, dst, grain=19.0, seed=7):
     # 4. Flash bloom + halation around bright highlights
     b = np.clip((lum - 0.78) / 0.22, 0, 1)[..., 0]
     bloom = np.asarray(Image.fromarray((b * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(max(w, h) / 90))).astype(np.float32) / 255
-    a = a + bloom[..., None] * np.array([0.06, 0.025, 0.02])
+    a = a + bloom[..., None] * (np.array([0.09, 0.05, 0.035]) if people else np.array([0.06, 0.025, 0.02]))   # flash glow on skin/highlights
     # 4b. Printed-film finish: faded whites, lifted blacks
     a = 0.035 + np.clip(a, 0, 1.2) * 0.885
     # 5. Film grain: luminance, fine, strongest in midtones
@@ -41,4 +45,6 @@ def grade(src, dst, grain=19.0, seed=7):
     Image.fromarray((np.clip(a, 0, 1) * 255).round().astype(np.uint8)).save(dst, quality=92, subsampling=0)
 
 if __name__ == '__main__':
-    grade(sys.argv[1], sys.argv[2], *(float(v) for v in sys.argv[3:4]))
+    people = '--people' in sys.argv
+    args = [v for v in sys.argv[1:] if v != '--people']
+    grade(args[0], args[1], people=people)
