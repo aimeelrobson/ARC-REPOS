@@ -2,8 +2,10 @@
 import sys, numpy as np
 from PIL import Image, ImageFilter
 
-def grade(src, dst, grain=22.0, seed=7, people=False):
+def grade(src, dst, grain=19.0, seed=7, people=False, scale=2):
     im = Image.open(src).convert('RGB')
+    if scale > 1:                                                        # grade at 2x so grain reads as fine film, not blocky pixels
+        im = im.resize((im.width * scale, im.height * scale), Image.LANCZOS)
     im = im.filter(ImageFilter.GaussianBlur(0.45))                      # soften AI crispness
     a = np.asarray(im).astype(np.float32) / 255.0
     h, w, _ = a.shape
@@ -26,9 +28,9 @@ def grade(src, dst, grain=22.0, seed=7, people=False):
     lum = (a * [0.299, 0.587, 0.114]).sum(2, keepdims=True)
     warm = np.clip(a[..., 0:1] - (a[..., 1:2] + a[..., 2:3]) / 2, 0, 1)  # how red/orange a pixel is
     a = lum + (a - lum) * (1.12 - 0.38 * warm)                            # richer cool pastels, calm hot reds/oranges
-    a = a * np.array([0.975, 0.99, 1.065])                               # pink-magenta film cast, a touch warmer
+    a = a * np.array([0.95, 0.985, 1.10])                                # cooler, pink-magenta film cast
     hi = np.clip((lum - 0.55) / 0.45, 0, 1); lo = np.clip((0.35 - lum) / 0.35, 0, 1)
-    a = a + hi * np.array([0.030, 0.014, -0.012]) + lo * np.array([-0.006, 0.004, 0.012])
+    a = a + hi * np.array([0.020, 0.008, -0.012]) + lo * np.array([-0.010, 0.004, 0.016])
     # 4. Flash bloom + halation around bright highlights
     b = np.clip((lum - 0.78) / 0.22, 0, 1)[..., 0]
     bloom = np.asarray(Image.fromarray((b * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(max(w, h) / 90))).astype(np.float32) / 255
@@ -46,5 +48,5 @@ def grade(src, dst, grain=22.0, seed=7, people=False):
 
 if __name__ == '__main__':
     people = '--people' in sys.argv
-    args = [v for v in sys.argv[1:] if v != '--people']
-    grade(args[0], args[1], people=people)
+    args = [v for v in sys.argv[1:] if not v.startswith('--')]
+    grade(args[0], args[1], people=people, scale=1 if '--1x' in sys.argv else 2)
