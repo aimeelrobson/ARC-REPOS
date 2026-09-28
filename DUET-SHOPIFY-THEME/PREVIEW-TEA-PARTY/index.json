@@ -1,0 +1,732 @@
+{
+  "sections": {
+    "duet_tweaks_css": {
+      "type": "duet-tweaks",
+      "settings": {
+        "kits_bg": "#cdebdd",
+        "story_bg": "#d9ccf5",
+        "gallery_bg": "#ffffff",
+        "faq_bg": "#fce7a0"
+      }
+    },
+    "duet_pastel_hero": {
+      "type": "duet-pastel-hero",
+      "blocks": {
+        "hero_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Room for <em>two</em> voices.",
+            "size": 88,
+            "size_mobile": 72,
+            "space_below": 28,
+            "colour": ""
+          }
+        },
+        "hero_button": {
+          "type": "button",
+          "settings": {
+            "label": "SHOP THE KITS",
+            "link": "shopify://collections/duet-kits",
+            "style": "dark",
+            "size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "hero_heading",
+        "hero_button"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/duet-pastel-people-06-tea-party-wide.jpg",
+        "focus_x": 50,
+        "focus_y": 50,
+        "overlay": 0,
+        "image_mobile": "shopify://shop_images/duet-pastel-people-06-tea-party.jpg",
+        "mobile_ratio": "portrait",
+        "m_focus_x": 50,
+        "m_focus_y": 50,
+        "height": 85,
+        "h_pos": "left",
+        "v_pos": "top",
+        "align": "left",
+        "copy_width": 40,
+        "edge_space": 56,
+        "mobile_align": "left",
+        "float_text": "",
+        "float_pos": "top-right",
+        "ticker": "No app | No pairing | Two mics, one receiver | Free NZ shipping | 14-day returns | Kits from $69 NZD",
+        "s_bg": "#cdebdd",
+        "s_fg": "#1c1517",
+        "s_pill": "#f7c6d6",
+        "s_tick_bg": "#1c1517",
+        "s_tick_fg": "#fff6f1",
+        "s_mob": "#f7c6d6",
+        "heading": "Room for <em>two</em> voices.",
+        "button_label": "Shop the kit",
+        "button_link": "shopify://collections/duet-kits"
+      }
+    },
+    "marquee_YryCpt": {
+      "type": "Marquee",
+      "blocks": {
+        "text_NwqztK": {
+          "type": "text",
+          "settings": {
+            "new_text": "TWO VOICES"
+          }
+        },
+        "text_RVTPQA": {
+          "type": "text",
+          "settings": {
+            "new_text": "✶"
+          }
+        },
+        "text_cYFagD": {
+          "type": "text",
+          "settings": {
+            "new_text": "NO APP OR PAIRING"
+          }
+        },
+        "text_RWMYMj": {
+          "type": "text",
+          "settings": {
+            "new_text": "✶"
+          }
+        },
+        "text_xLHxak": {
+          "type": "text",
+          "settings": {
+            "new_text": "ONE RECEIVER"
+          }
+        },
+        "text_KrLJX3": {
+          "type": "text",
+          "settings": {
+            "new_text": "✶"
+          }
+        },
+        "text_pz01aa": {
+          "type": "text",
+          "settings": {
+            "new_text": "FREE NZ SHIPPING"
+          }
+        },
+        "text_pz01ab": {
+          "type": "text",
+          "settings": {
+            "new_text": "✶"
+          }
+        }
+      },
+      "block_order": [
+        "text_NwqztK",
+        "text_RVTPQA",
+        "text_cYFagD",
+        "text_RWMYMj",
+        "text_xLHxak",
+        "text_KrLJX3",
+        "text_pz01aa",
+        "text_pz01ab"
+      ],
+      "disabled": true,
+      "settings": {
+        "colorBackground": "#f7c6d6",
+        "colorText": "#1c1517",
+        "link": "shopify://collections/duet-kits",
+        "marquee_height": 56,
+        "font_size": 18,
+        "marquee_speed": 27
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Choose your kit",
+        "heading_size": "h1",
+        "description": "<p>One voice, two voices, or take it with you.</p>",
+        "show_description": true,
+        "description_style": "body",
+        "collection": "duet-kits",
+        "products_to_show": 3,
+        "columns_desktop": 3,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-5",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "standard",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 72,
+        "padding_bottom": 80
+      }
+    },
+    "duet_pastel_colourways": {
+      "type": "duet-pastel-colourways",
+      "blocks": {
+        "colour_blush": {
+          "type": "colour",
+          "settings": {
+            "name": "Blush",
+            "sub": "Pink",
+            "cta": "Shop Blush",
+            "link": "/products/duet-kit-wireless-mics-for-two?variant=50523102445666",
+            "image": "shopify://shop_images/duet-pastel-hero-01-wave-plinth.jpg",
+            "bg": "#f7c6d6"
+          }
+        },
+        "colour_cloud": {
+          "type": "colour",
+          "settings": {
+            "name": "Cloud",
+            "sub": "White",
+            "cta": "Shop Cloud",
+            "link": "/products/duet-kit-wireless-mics-for-two?variant=50523102347362",
+            "image": "shopify://shop_images/duet-pastel-cloud-hero-01-on-a-cloud.jpg",
+            "bg": "#d9ccf5"
+          }
+        },
+        "colour_noir": {
+          "type": "colour",
+          "settings": {
+            "name": "Noir",
+            "sub": "Black",
+            "cta": "Shop Noir",
+            "link": "/products/duet-kit-wireless-mics-for-two?variant=50523102380130",
+            "image": "shopify://shop_images/duet-pastel-noir-hero-02-tied-bow.jpg",
+            "bg": "#fce7a0"
+          }
+        }
+      },
+      "block_order": [
+        "colour_blush",
+        "colour_cloud",
+        "colour_noir"
+      ],
+      "settings": {
+        "heading": "Blush, Cloud or <em>Noir?</em>",
+        "text": "Three colours. The same tiny mics. Which one's you?",
+        "heading_size": 68,
+        "heading_align": "center",
+        "s_bg": "#ffffff",
+        "s_fg": "#1c1517",
+        "s_pt": 72,
+        "s_pb": 72
+      }
+    },
+    "duet_pastel_usecases": {
+      "type": "duet-pastel-usecases",
+      "blocks": {
+        "uc_podcasts": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/duet-pastel-noir-people-01-diner.jpg",
+            "label": "podcasts.",
+            "sticker_bg": "#f7c6d6",
+            "link": "shopify://products/duet-kit-wireless-mics-for-two"
+          }
+        },
+        "uc_grwm": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/duet-pastel-people-04-grwm-vanity.jpg",
+            "label": "GRWMs.",
+            "sticker_bg": "#cdebdd",
+            "link": "shopify://products/duet-kit-wireless-mics-for-two"
+          }
+        },
+        "uc_interviews": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/duet-pastel-people-03-giant-phone.jpg",
+            "label": "interviews.",
+            "sticker_bg": "#d9ccf5",
+            "link": "shopify://products/duet-kit-wireless-mics-for-two"
+          }
+        },
+        "uc_chats": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/duet-pastel-cloud-people-01-cloud-sofa.jpg",
+            "label": "sofa chats.",
+            "sticker_bg": "#fce7a0",
+            "link": "shopify://products/duet-kit-wireless-mics-for-two"
+          }
+        }
+      },
+      "block_order": [
+        "uc_podcasts",
+        "uc_grwm",
+        "uc_interviews",
+        "uc_chats"
+      ],
+      "settings": {
+        "heading": "Made for the way <em>you</em> film",
+        "text": "If there are two of you talking, there should be two mics.",
+        "heading_size": 68,
+        "s_bg": "#fdd3b8",
+        "s_fg": "#1c1517",
+        "s_pt": 72,
+        "s_pb": 72
+      }
+    },
+    "duet_pastel_steps": {
+      "type": "duet-pastel-steps",
+      "blocks": {
+        "step_plug": {
+          "type": "step",
+          "settings": {
+            "title": "Plug in",
+            "text": "Pop the receiver into your phone's USB-C port.",
+            "image": "shopify://shop_images/duet-pastel-scene-02-creator-flatlay.jpg",
+            "bg": "#cdebdd"
+          }
+        },
+        "step_clip": {
+          "type": "step",
+          "settings": {
+            "title": "Clip on",
+            "text": "One tiny mic each, clipped to a collar or strap.",
+            "image": "shopify://shop_images/duet-pastel-people-02-sofa-podcast.jpg",
+            "bg": "#f7c6d6"
+          }
+        },
+        "step_record": {
+          "type": "step",
+          "settings": {
+            "title": "Hit record",
+            "text": "Open your camera and film. Both voices land in the same recording.",
+            "image": "shopify://shop_images/duet-pastel-scene-03-retro-tv.jpg",
+            "bg": "#d9ccf5"
+          }
+        }
+      },
+      "block_order": [
+        "step_plug",
+        "step_clip",
+        "step_record"
+      ],
+      "settings": {
+        "heading": "Plug in. Clip on. <em>Hit record.</em>",
+        "text": "No app. No Bluetooth pairing. Nothing to set up.",
+        "note": "Connects via USB-C: modern Android phones and iPhone 15 and newer.",
+        "heading_size": 68,
+        "heading_align": "center",
+        "s_bg": "#ffffff",
+        "s_fg": "#1c1517",
+        "s_pt": 72,
+        "s_pb": 72
+      }
+    },
+    "multicolumn_trust_B2": {
+      "type": "multicolumn",
+      "blocks": {
+        "col_t1": {
+          "type": "column",
+          "settings": {
+            "title": "Free NZ shipping",
+            "text": "<p>On every order</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "col_t2": {
+          "type": "column",
+          "settings": {
+            "title": "14-day returns",
+            "text": "<p>On unused kits</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "col_t3": {
+          "type": "column",
+          "settings": {
+            "title": "12-month warranty",
+            "text": "<p>On every DUET kit</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "col_t4": {
+          "type": "column",
+          "settings": {
+            "title": "Secure checkout",
+            "text": "<p>Encrypted &amp; guaranteed</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "col_t1",
+        "col_t2",
+        "col_t3",
+        "col_t4"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "Everything you need. Nothing you don’t.",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-4",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "duet_pastel_trust": {
+      "type": "duet-pastel-trust",
+      "blocks": {
+        "p1": {
+          "type": "promise",
+          "settings": {
+            "title": "Free NZ shipping",
+            "text": "On every order",
+            "bg": "#f7c6d6"
+          }
+        },
+        "p2": {
+          "type": "promise",
+          "settings": {
+            "title": "14-day returns",
+            "text": "On unused kits",
+            "bg": "#cdebdd"
+          }
+        },
+        "p3": {
+          "type": "promise",
+          "settings": {
+            "title": "12-month warranty",
+            "text": "On every DUET kit",
+            "bg": "#d9ccf5"
+          }
+        },
+        "p4": {
+          "type": "promise",
+          "settings": {
+            "title": "Secure checkout",
+            "text": "Encrypted & guaranteed",
+            "bg": "#fce7a0"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "settings": {
+        "heading": "Everything you need. Nothing you don’t.",
+        "heading_size": 56,
+        "heading_align": "left",
+        "s_bg": "#1c1517",
+        "s_fg": "#fff6f1",
+        "s_pt": 72,
+        "s_pb": 72
+      }
+    },
+    "image_with_text_hThDRT": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_mK89pN": {
+          "type": "heading",
+          "settings": {
+            "heading": "Built for two voices, not one performer",
+            "heading_size": "h1"
+          }
+        },
+        "text_Hd7aj4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Filming with someone else is where phone audio usually falls apart. One mic means one clear voice and one distant guest. DUET gives both people their own microphone, feeding a single receiver connected straight to your phone. No app, no Bluetooth pairing, just plug in and go.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_QgVhig": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop the kit",
+            "button_link": "shopify://collections/duet-kits",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_mK89pN",
+        "text_Hd7aj4",
+        "button_QgVhig"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/duet-pastel-hero-02-the-couple.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "section_color_scheme": "scheme-553c4d19-9703-445f-9c07-461590f4aef1",
+        "color_scheme": "scheme-553c4d19-9703-445f-9c07-461590f4aef1",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "link_image_banner_kkNkie": {
+      "type": "link-image-banner",
+      "blocks": {
+        "buttons_EzFaqa": {
+          "type": "buttons",
+          "settings": {
+            "button_link_1": "shopify://collections/duet-kits"
+          }
+        }
+      },
+      "block_order": [
+        "buttons_EzFaqa"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/duet-insitu-pink.jpg",
+        "image_height": "adapt",
+        "adapt_height_first_image": true,
+        "image_overlay_opacity": 0,
+        "stack_images_on_mobile": false
+      }
+    },
+    "image_gallery_7xHG89": {
+      "type": "image-gallery",
+      "blocks": {
+        "image_ncVLWB": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/duet-pastel-scene-01-radio-tiles.jpg"
+          }
+        },
+        "image_xVREq4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/duet-pastel-noir-scene-01-bow-flatlay.jpg"
+          }
+        },
+        "image_EGQ4qR": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/duet-pastel-scene-04-donut-stack.jpg"
+          }
+        },
+        "image_KPk3GJ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/duet-pastel-cloud-scene-01-sky-flatlay.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_ncVLWB",
+        "image_xVREq4",
+        "image_EGQ4qR",
+        "image_KPk3GJ"
+      ],
+      "settings": {
+        "heading": "<h1>Made to move with you</h1>",
+        "images_per_row": 4,
+        "images_per_row_mobile": 4,
+        "grid_gap": 16,
+        "full_width": true,
+        "mobile_slider": true
+      }
+    },
+    "collapsible_content_fJR3nd": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_meNQCD": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can both mics record at once?",
+            "icon": "none",
+            "row_content": "<p>Yes. Both microphones feed one receiver, so both voices are captured in the same recording.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_4CLx8c": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Will it work with my phone?",
+            "icon": "none",
+            "row_content": "<p>It connects via USB-C, the charging port on modern Android phones and iPhone 15 and newer. Not compatible with older Lightning iPhones.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_XBVmDa": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I use just one mic?",
+            "icon": "none",
+            "row_content": "<p>Yes. Use one or both, depending on the shot.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_HTbMTC": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Shipping, returns and warranty",
+            "icon": "none",
+            "row_content": "<p>Free NZ shipping, Australia NZ$10 flat. Tracked delivery in 7 to 14 business days in NZ, or 10 to 18 to Australia. 14-day returns on unused items. 12-month warranty.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_meNQCD",
+        "collapsible_row_4CLx8c",
+        "collapsible_row_XBVmDa",
+        "collapsible_row_HTbMTC"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "The practical stuff",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "color_scheme": "",
+        "container_color_scheme": "scheme-1",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_first",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "rich_text_tDWdpk": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_7RJxRA": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ready for both sides of the conversation?",
+            "heading_size": "h1"
+          }
+        },
+        "text_close": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Choose the DUET setup that fits the way you create.</p>"
+          }
+        },
+        "button_close": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop the kits",
+            "button_link": "shopify://collections/duet-kits",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_7RJxRA",
+        "text_close",
+        "button_close"
+      ],
+      "disabled": true,
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "duet_pastel_closer": {
+      "type": "duet-pastel-closer",
+      "settings": {
+        "heading": "Ready for <em>both</em> sides of the conversation?",
+        "text": "Choose the DUET setup that fits the way you create.",
+        "button_label": "Shop the kits",
+        "button_link": "shopify://collections/duet-kits",
+        "heading_size": 84,
+        "heading_align": "center",
+        "s_bg": "#f7c6d6",
+        "s_fg": "#1c1517",
+        "s_btn": "#1c1517",
+        "s_btn_text": "#fff6f1",
+        "s_pt": 96,
+        "s_pb": 96
+      }
+    },
+    "lipstick_scale": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_lip": {
+          "type": "heading",
+          "settings": {
+            "heading": "Smaller than your lipstick.",
+            "heading_size": "h0"
+          }
+        },
+        "text_lip": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Each DUET mic is just 6.5cm tall. Clip one on each of you, plug the tiny receiver into your phone, and hit record.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_lip",
+        "text_lip"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/duet-pastel-scene-05-smaller-than-lipstick.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "duet_tweaks_css",
+    "duet_pastel_hero",
+    "lipstick_scale",
+    "marquee_YryCpt",
+    "featured_collection",
+    "duet_pastel_colourways",
+    "duet_pastel_usecases",
+    "duet_pastel_steps",
+    "multicolumn_trust_B2",
+    "duet_pastel_trust",
+    "image_with_text_hThDRT",
+    "link_image_banner_kkNkie",
+    "image_gallery_7xHG89",
+    "collapsible_content_fJR3nd",
+    "rich_text_tDWdpk",
+    "duet_pastel_closer"
+  ]
+}
