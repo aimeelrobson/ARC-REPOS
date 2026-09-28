@@ -671,11 +671,50 @@
         "s_pt": 96,
         "s_pb": 96
       }
+    },
+    "lipstick_scale": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_lip": {
+          "type": "heading",
+          "settings": {
+            "heading": "Smaller than your lipstick.",
+            "heading_size": "h0"
+          }
+        },
+        "text_lip": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Each DUET mic is just 6.5cm tall. Clip one on each of you, plug the tiny receiver into your phone, and hit record.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_lip",
+        "text_lip"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/duet-pastel-scene-05-smaller-than-lipstick.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
     }
   },
   "order": [
     "duet_tweaks_css",
     "duet_pastel_hero",
+    "lipstick_scale",
     "marquee_YryCpt",
     "featured_collection",
     "duet_pastel_colourways",
