@@ -24,6 +24,7 @@ D05 uses the Liquid Therapy hand footage (also D10's page).
 NEW (24 NOV, pending Aimee's approval): recovered Canva motion + typography
 - COLORZINE-D03-EMAIL-HAND-OVERLAY-V1-SILENT.mp4 (Email page). Locked song for this page: 99% - Jessie Reyez
 - COLORZINE-D05-TOUCHGRASS-HAND-OVERLAY-V1-SILENT.mp4 (Touch Grass page). Locked song for this page: Woo! - Remi Wolf
+- COLORZINE-D06-BOTANICAL-HAND-OVERLAY-V1-SILENT.mp4 (Botanical page). Locked song for this page: Love Lost - Mac Miller & The Temper Trap. Little colour is added in the source footage (one leaf).
 - 7.0s, 1080x1920, 30fps, silent. Hook on screen 0-3.4s, "AI-GENERATED VISUAL" label top-left, end card with call to action.
 - Slots are NOT yet assigned: D02's slot (24 Nov, 13:55 NZ) has passed. Confirm dates with Aimee.
 - Typeface: Victory Striker Sans DEMO. Demo fonts are usually personal-use only: confirm a commercial licence before posting.
