@@ -1,31 +1,31 @@
-# ON HOLD (24 NOV): the FIRST hand-colouring files (pen/colour sync issue) are REJECTED: do not post COLORZINE-D02-EMAIL-HAND-COLOURING-SILENT.mp4, COLORZINE-D04-TOUCHGRASS-HAND-COLOURING-SILENT.mp4 or COLORZINE-D05-RECUT-V1-BEAT120-SILENT.mp4.
+# COLORZINE POSTING PLAN: HAND-COLOURING VIDEOS (24 NOV 2026)
 
-# COLORZINE POSTING PLAN: HAND-COLOURING SWAP (24 NOV 2026)
+STATUS: pending Aimee's approval. Do not post until approved.
+All files: silent, 1080x1920, 30fps, 7.0s. Add ONE song per video natively in TikTok.
+Switch ON TikTok's own "AI-generated content" label. Post time: 13:55 NZ.
 
-All files are silent masters, 1080x1920, 30fps, 10s. Add ONE song per video natively in TikTok.
-Turn ON TikTok's own "AI-generated content" label in post settings.
+## ASSIGNMENTS
 
-| Slot | Date (13:55 NZ) | File | Song (add in TikTok) |
-|---|---|---|---|
-| D02 | Tue 24 Nov | COLORZINE-D02-EMAIL-HAND-COLOURING-SILENT.mp4 | 99% - Jessie Reyez |
-| D03 | Wed 25 Nov | COLORZINE-D03-RECUT-V3-BEAT100-SILENT.mp4 | Bags - Clairo |
-| D04 | Thu 26 Nov | COLORZINE-D04-TOUCHGRASS-HAND-COLOURING-SILENT.mp4 | Woo! - Remi Wolf |
-| D05 | Fri 27 Nov | COLORZINE-D05-RECUT-V1-BEAT120-SILENT.mp4 | Photo ID - Remi Wolf |
+| Date (NZ) | Slot | File | Song (add in TikTok) | Replaces |
+|---|---|---|---|---|
+| Wed 25 Nov | D03 | COLORZINE-D03-EMAIL-HAND-OVERLAY-V1-SILENT.mp4 | 99% - Jessie Reyez | the scheduled static founder video |
+| Thu 26 Nov | D04 | COLORZINE-D05-TOUCHGRASS-HAND-OVERLAY-V1-SILENT.mp4 | Woo! - Remi Wolf | the animated Touch Grass post (same page) |
+| Sat 28 Nov | D06 | COLORZINE-D06-BOTANICAL-HAND-OVERLAY-V1-SILENT.mp4 | Love Lost - Mac Miller & The Temper Trap | the animated Botanical post (same page) |
 
-NOTES
-- Scheduled TikTok posts cannot be edited, only deleted and re-uploaded.
-- D02's 13:55 NZ slot on 24 Nov may already have posted. Check TikTok Studio before re-uploading.
-- Remi Wolf appears twice (D04, D05) on back-to-back days. Consider a different D05 song.
-- Source: HAND-COLOURING-MASTERS/ (D03 Email file = D02 slot, D05 Touch Grass file = D04 slot).
+Fri 27 Nov (D05) stays as Secret Santa. Song: Photo ID - Remi Wolf (approved).
+Songs follow the locked page-to-song map.
 
-D05 RE-CUT: 120 BPM grid assumed (1 bar = 2.0s). Cuts at 2.0s and 8.0s. Confirm Photo ID's tempo; tell Claude the BPM if it differs.
-D05 uses the Liquid Therapy hand footage (also D10's page).
+## HOW TO SWAP
+Scheduled TikTok posts cannot be edited. In TikTok Studio: delete the old scheduled post, then
+upload the new file for the same date at 13:55 NZ, add the song, caption, AI label.
+Do the 25 Nov swap first: it is the soonest.
 
-NEW (24 NOV, pending Aimee's approval): recovered Canva motion + typography
-- COLORZINE-D03-EMAIL-HAND-OVERLAY-V1-SILENT.mp4 (Email page). Locked song for this page: 99% - Jessie Reyez
-- COLORZINE-D05-TOUCHGRASS-HAND-OVERLAY-V1-SILENT.mp4 (Touch Grass page). Locked song for this page: Woo! - Remi Wolf
-- COLORZINE-D06-BOTANICAL-HAND-OVERLAY-V1-SILENT.mp4 (Botanical page). Locked song for this page: Love Lost - Mac Miller & The Temper Trap. Little colour is added in the source footage (one leaf).
-- 7.0s, 1080x1920, 30fps, silent. Hook on screen 0-3.4s, "AI-GENERATED VISUAL" label top-left, end card with call to action.
-- Slots are NOT yet assigned: D02's slot (24 Nov, 13:55 NZ) has passed. Confirm dates with Aimee.
-- Typeface: Victory Striker Sans DEMO. Demo fonts are usually personal-use only: confirm a commercial licence before posting.
-- Tempo not known: no beat grid applied. Give the song BPM to re-time.
+## WATCH-OUTS
+- D02 (24 Nov) was the animated Email page. If it posted, Email repeats on 25 Nov.
+  Fallback: move the Email hand video to Tue 1 Dec and keep the founder video on 25 Nov.
+- Remi Wolf is on back-to-back days (26 and 27 Nov). Consider a different song for 27 Nov.
+- The founder re-cut (Bags - Clairo) now has no slot. Parked.
+- D10 Liquid Therapy and D15 Out of Office hand videos are not ready.
+- Typeface is Victory Striker Sans DEMO: confirm a commercial licence before posting.
+- Tempo of songs unknown: no beat grid applied.
+- D06: little colour is added in the source footage (one leaf).
