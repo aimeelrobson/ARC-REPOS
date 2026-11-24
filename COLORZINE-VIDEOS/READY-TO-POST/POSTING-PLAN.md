@@ -1,3 +1,5 @@
+# ON HOLD (24 NOV): hand-colouring videos show a pen/colour sync issue. Do NOT post D02, D04, D05 until fixed.
+
 # COLORZINE POSTING PLAN: HAND-COLOURING SWAP (24 NOV 2026)
 
 All files are silent masters, 1080x1920, 30fps, 10s. Add ONE song per video natively in TikTok.
