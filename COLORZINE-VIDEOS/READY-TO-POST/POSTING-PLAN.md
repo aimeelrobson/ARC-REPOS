@@ -1,6 +1,6 @@
 # COLORZINE POSTING PLAN: HAND-COLOURING VIDEOS (24 NOV 2026)
 
-STATUS: pending Aimee's approval. Do not post until approved.
+STATUS: APPROVED by Aimee. Plan kept as is (dates, songs and files below).
 All files: silent, 1080x1920, 30fps, 7.0s. Add ONE song per video natively in TikTok.
 Switch ON TikTok's own "AI-generated content" label. Post time: 13:55 NZ.
 
